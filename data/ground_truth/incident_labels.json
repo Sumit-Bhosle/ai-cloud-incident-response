@@ -1,0 +1,34 @@
+[
+  {
+    "scenario_id": "SCN-001",
+    "expected_classification": "benign",
+    "severity": "low",
+    "expected_event_ids": [
+      "EVT-001",
+      "EVT-002"
+    ],
+    "rationale": "MFA-protected login followed by read-only activity."
+  },
+  {
+    "scenario_id": "SCN-002",
+    "expected_classification": "suspicious",
+    "severity": "high",
+    "expected_event_ids": [
+      "EVT-003",
+      "EVT-004",
+      "EVT-005",
+      "EVT-006"
+    ],
+    "rationale": "Login without MFA followed by access-key creation and administrative policy attachment. Secret access was denied."
+  },
+  {
+    "scenario_id": "SCN-003",
+    "expected_classification": "benign",
+    "severity": "low",
+    "expected_event_ids": [
+      "EVT-007",
+      "EVT-008"
+    ],
+    "rationale": "Approved backup role followed by scheduled backup activity."
+  }
+]
