@@ -15,7 +15,7 @@ Evaluating AI-Assisted Cloud Security Incident Response
 
 ## Experiment 000 — Dataset Generator Validation
 
-**Status:** Completed initial validation  
+**Status:** Completed initial validation
 **Date:** 2026-10-23
 
 ### Objective
@@ -71,3 +71,77 @@ Not yet available.
 
 ### Limitations
 No baseline investigation results have been measured yet.
+
+## Experiment 001 — Deterministic Baseline Evaluation
+
+**Status:** Completed on the initial synthetic pilot
+**Date:** 2026-10-23
+
+### Objective
+Evaluate the deterministic baseline investigator against the separately
+stored ground-truth classifications.
+
+### Implementation
+- Investigator: `src/investigation/baseline_investigator.py`
+- Evaluator: `src/evaluation/evaluate_baseline.py`
+- Input events: `data/raw/cloud_audit_events.jsonl`
+- Ground truth: `data/ground_truth/incident_labels.json`
+- Investigator output: `results/baseline_findings.json`
+
+### Procedure
+1. Load and validate the synthetic event records.
+2. Group events by scenario ID.
+3. Apply predefined investigation rules.
+4. Produce classifications, reasons, supporting event IDs, and limitations.
+5. Compare predictions against ground-truth labels.
+6. Calculate scenario-level accuracy and per-class precision, recall, and F1.
+
+### Observed Investigator Results
+- Events processed: 8.
+- Scenarios investigated: 3.
+- SCN-001 classified as benign by BASELINE-RULE-002.
+- SCN-002 classified as suspicious by BASELINE-RULE-001.
+- SCN-003 classified as benign by BASELINE-RULE-003.
+- Findings were written to `results/baseline_findings.json`.
+- Findings included supporting event IDs, reasons, and limitations.
+- The denied secret-access event was not described as a successful retrieval.
+
+### Observed Evaluation Results
+- Scenarios evaluated: 3.
+- Correct classifications: 3 out of 3.
+- Accuracy: 1.000 (100.0%).
+- Benign class: precision 1.000, recall 1.000, F1 1.000, support 2.
+- Suspicious class: precision 1.000, recall 1.000, F1 1.000, support 1.
+- All three scenario comparisons were reported as MATCH.
+
+### Interpretation
+The baseline matched all three labels in this pilot run. The rules were
+designed around these scenarios, so this result is a functional smoke test,
+not evidence of generalization to unseen incidents.
+
+### Limitations and Threats to Validity
+- Only three scenarios were evaluated.
+- The synthetic scenarios are simplified and manually authored.
+- Ground-truth labels have not undergone independent expert review.
+- The rules were designed around the pilot scenarios, creating a risk of
+  optimistic results.
+- No held-out test set has been evaluated.
+- Classification metrics do not measure evidence quality, unsupported
+  claims, human analyst efficiency, or real-world operational performance.
+- No AI-assisted comparison has been conducted.
+
+### Evidence and Reproducibility
+- Run the investigator with:
+  `python3 src/investigation/baseline_investigator.py`
+- Run the evaluator with:
+  `python3 src/evaluation/evaluate_baseline.py`
+- Record the Git commit containing the finalized scripts and this log update
+  after it is created.
+
+### Next Actions
+- Add tests for malformed data, missing fields, duplicate IDs, and unknown
+  scenario patterns.
+- Expand scenario diversity before making broader claims.
+- Define evaluation procedures for evidence grounding and unsupported claims.
+- Preserve this pilot result rather than silently replacing it when rules
+  or data change.
