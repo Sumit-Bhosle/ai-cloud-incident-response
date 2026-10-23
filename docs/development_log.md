@@ -114,3 +114,29 @@ For each subsequent milestone, record:
 
 Only record results that were actually observed. Mark proposed work as planned,
 and distinguish debugging evidence from experimental evidence.
+
+### Entry 004 — Rule-Based Baseline Investigation and Evaluation
+
+**Status:** Implemented and locally validated; committed and pushed.
+
+**Implementation**
+- Added `src/investigation/baseline_investigator.py` to validate and group synthetic cloud-audit events, apply transparent scenario rules, and produce structured findings.
+- Added `src/evaluation/evaluate_baseline.py` to compare predicted classifications against the separately stored ground-truth labels.
+- Recorded scenario-level accuracy and per-class precision, recall, and F1.
+- Updated `docs/experiment_log.md` with the baseline experiment and its limitations.
+
+**Observed pilot results**
+- Input: 8 synthetic audit events across 3 scenarios.
+- Correct classifications: 3 of 3.
+- Observed accuracy: 100%.
+- Benign scenarios: 2; suspicious scenarios: 1.
+- Both scripts executed successfully, and the generated findings were validated as JSON.
+
+**Limitations**
+The rules were designed around the current pilot scenarios. Ground-truth labels have not been independently reviewed, and there is no held-out evaluation set. These results are preliminary and do not establish performance on unseen incidents. AI-assisted evaluation and human analyst-efficiency measurements have not yet been conducted.
+
+**Reproducibility**
+- Investigator: `python3 src/investigation/baseline_investigator.py`
+- Evaluator: `python3 src/evaluation/evaluate_baseline.py`
+- Git commit: `1f6e7e3` — `Implement baseline investigation and evaluation`
+- Repository: https://github.com/Sumit-Bhosle/ai-cloud-incident-response
