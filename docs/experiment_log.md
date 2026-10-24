@@ -179,3 +179,38 @@ python3 src/evaluation/evaluate_robustness.py
 ```
 
 **Output:** `results/robustness/robustness_findings.json` (generated local artifact; not necessarily tracked by Git).
+
+### Experiment 003 — Synthetic Baseline Failure-Mode Diagnostic
+
+**Objective:** Investigate limitations of the original deterministic baseline using five synthetic scenarios designed to challenge its classification logic.
+
+**Inputs:**
+- `data/failure_modes/events.jsonl`
+- `data/failure_modes/ground_truth.json`
+
+**Implementation:** Added `src/evaluation/evaluate_failure_modes.py` to validate the test inputs, run the existing `investigate_scenario` function, compare predicted classifications with provisional expected labels, and save a JSON report. The original baseline rules were not modified.
+
+**Observed results:**
+- Events: 13
+- Scenarios: 5
+- Matches: 2/5
+- Mismatches: 3
+- Scenario-level agreement: 0.400 (40%)
+
+**Scenario findings:**
+- FM-001: Correctly classified as suspicious despite reverse chronological record order.
+- FM-002: Classified as suspicious even though the relevant successful actions belong to three different identities.
+- FM-003: Returned inconclusive despite a successful administrative-policy attachment.
+- FM-004: Correctly returned inconclusive for a successful login without MFA alone.
+- FM-005: Returned inconclusive despite a successful administrative-policy attachment alongside MFA-protected read-only activity.
+
+**Interpretation:** The diagnostic exposed limitations in identity correlation and detection coverage for privilege changes. The baseline uses scenario-level event presence checks rather than robust actor/session correlation and broader investigation logic.
+
+**Limitations:** All events are synthetic, manually constructed, and evaluated against provisional expected labels. The five scenarios are too small and intentionally targeted to support general performance claims. The 40% agreement is specific to this diagnostic set, not a real-world accuracy estimate.
+
+**Reproduction command:**
+```bash
+python3 src/evaluation/evaluate_failure_modes.py
+```
+
+**Output:** `results/failure_modes/failure_mode_findings.json`.

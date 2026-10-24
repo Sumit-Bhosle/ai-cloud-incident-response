@@ -1,0 +1,28 @@
+
+[
+  {
+    "scenario_id": "FM-001",
+    "expected_classification": "suspicious",
+    "rationale": "The same identity performs successful administrative privilege changes and access-key creation without MFA. The events are listed in reverse chronological order, but their timestamps establish the sequence."
+  },
+  {
+    "scenario_id": "FM-002",
+    "expected_classification": "inconclusive",
+    "rationale": "The login, access-key creation, and administrative policy attachment belong to three different identities. The available events do not establish a common actor or causal relationship."
+  },
+  {
+    "scenario_id": "FM-003",
+    "expected_classification": "suspicious",
+    "rationale": "Successful administrative policy attachment is present alongside otherwise benign-looking MFA-protected read-only activity."
+  },
+  {
+    "scenario_id": "FM-004",
+    "expected_classification": "inconclusive",
+    "rationale": "A successful login without MFA warrants investigation but does not independently prove malicious activity."
+  },
+  {
+    "scenario_id": "FM-005",
+    "expected_classification": "suspicious",
+    "rationale": "The successful administrative policy attachment means the scenario cannot safely be classified as benign based only on its MFA login and resource listing."
+  }
+]

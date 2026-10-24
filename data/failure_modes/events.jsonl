@@ -1,0 +1,14 @@
+
+{"event_id":"FM-EVT-001","timestamp":"2026-10-23T10:03:00Z","scenario_id":"FM-001","event_type":"AttachAdminPolicy","action":"AttachAdminPolicy","status":"Success","actor":"user-alpha","mfa_used":false,"resource":"admin-policy"}
+{"event_id":"FM-EVT-002","timestamp":"2026-10-23T10:02:00Z","scenario_id":"FM-001","event_type":"CreateAccessKey","action":"CreateAccessKey","status":"Success","actor":"user-alpha","mfa_used":false,"resource":"access-key"}
+{"event_id":"FM-EVT-003","timestamp":"2026-10-23T10:01:00Z","scenario_id":"FM-001","event_type":"ConsoleLogin","action":"ConsoleLogin","status":"Success","actor":"user-alpha","mfa_used":false,"resource":"console"}
+{"event_id":"FM-EVT-004","timestamp":"2026-10-23T11:01:00Z","scenario_id":"FM-002","event_type":"ConsoleLogin","action":"ConsoleLogin","status":"Success","actor":"user-alpha","mfa_used":false,"resource":"console"}
+{"event_id":"FM-EVT-005","timestamp":"2026-10-23T11:02:00Z","scenario_id":"FM-002","event_type":"CreateAccessKey","action":"CreateAccessKey","status":"Success","actor":"user-bravo","mfa_used":false,"resource":"access-key"}
+{"event_id":"FM-EVT-006","timestamp":"2026-10-23T11:03:00Z","scenario_id":"FM-002","event_type":"AttachAdminPolicy","action":"AttachAdminPolicy","status":"Success","actor":"user-charlie","mfa_used":false,"resource":"admin-policy"}
+{"event_id":"FM-EVT-007","timestamp":"2026-10-23T12:01:00Z","scenario_id":"FM-003","event_type":"ConsoleLogin","action":"ConsoleLogin","status":"Success","actor":"user-delta","mfa_used":true,"resource":"console"}
+{"event_id":"FM-EVT-008","timestamp":"2026-10-23T12:02:00Z","scenario_id":"FM-003","event_type":"ListResources","action":"ListResources","status":"Success","actor":"user-delta","mfa_used":true,"resource":"resource-inventory"}
+{"event_id":"FM-EVT-009","timestamp":"2026-10-23T12:03:00Z","scenario_id":"FM-003","event_type":"AttachAdminPolicy","action":"AttachAdminPolicy","status":"Success","actor":"user-delta","mfa_used":true,"resource":"admin-policy"}
+{"event_id":"FM-EVT-010","timestamp":"2026-10-23T13:01:00Z","scenario_id":"FM-004","event_type":"ConsoleLogin","action":"ConsoleLogin","status":"Success","actor":"user-echo","mfa_used":false,"resource":"console"}
+{"event_id":"FM-EVT-011","timestamp":"2026-10-23T14:01:00Z","scenario_id":"FM-005","event_type":"ConsoleLogin","action":"ConsoleLogin","status":"Success","actor":"user-foxtrot","mfa_used":true,"resource":"console"}
+{"event_id":"FM-EVT-012","timestamp":"2026-10-23T14:02:00Z","scenario_id":"FM-005","event_type":"ListResources","action":"ListResources","status":"Success","actor":"user-foxtrot","mfa_used":true,"resource":"resource-inventory"}
+{"event_id":"FM-EVT-013","timestamp":"2026-10-23T14:03:00Z","scenario_id":"FM-005","event_type":"AttachAdminPolicy","action":"AttachAdminPolicy","status":"Success","actor":"user-foxtrot","mfa_used":true,"resource":"admin-policy"}

@@ -150,3 +150,14 @@ The rules were designed around the current pilot scenarios. Ground-truth labels 
 - Corrected the evaluator to capture rule identifiers from the `matched_rule` field.
 - Documented the synthetic-data limitations and reproduction command in `docs/experiment_log.md`.
 - No real cloud logs, AI-assisted investigation, or real-world detection performance were evaluated in this milestone.
+
+
+### Entry 006 — Baseline Failure-Mode Diagnostic
+
+- Created a separate five-scenario, 13-event synthetic failure-mode dataset.
+- Added provisional expected labels in `data/failure_modes/ground_truth.json`.
+- Implemented the reusable evaluator `src/evaluation/evaluate_failure_modes.py`.
+- Reproduced 2/5 classification matches (40% scenario-level agreement) without modifying the original baseline rules.
+- Identified observed limitations involving cross-identity event aggregation and detection coverage for successful administrative-policy changes.
+- Recorded the results and methodological limitations in `docs/experiment_log.md`.
+- No real cloud telemetry or AI-assisted investigation was evaluated in this milestone.
