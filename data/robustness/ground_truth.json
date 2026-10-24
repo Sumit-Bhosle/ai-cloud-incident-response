@@ -1,0 +1,58 @@
+[
+  {
+    "scenario_id": "ROB-001",
+    "expected_classification": "inconclusive",
+    "severity": "undetermined",
+    "expected_event_ids": ["ROB-EVT-001", "ROB-EVT-002"],
+    "rationale": "The change-ticket reference is synthetic and has not been independently verified."
+  },
+  {
+    "scenario_id": "ROB-002",
+    "expected_classification": "inconclusive",
+    "severity": "undetermined",
+    "expected_event_ids": ["ROB-EVT-003"],
+    "rationale": "Access-key creation was denied; the event alone does not establish compromise."
+  },
+  {
+    "scenario_id": "ROB-003",
+    "expected_classification": "inconclusive",
+    "severity": "undetermined",
+    "expected_event_ids": ["ROB-EVT-004"],
+    "rationale": "A login without MFA warrants investigation but does not alone prove malicious activity."
+  },
+  {
+    "scenario_id": "ROB-004",
+    "expected_classification": "inconclusive",
+    "severity": "undetermined",
+    "expected_event_ids": ["ROB-EVT-005"],
+    "rationale": "The successful policy attachment lacks sufficient authentication and authorization context."
+  },
+  {
+    "scenario_id": "ROB-005",
+    "expected_classification": "inconclusive",
+    "severity": "undetermined",
+    "expected_event_ids": ["ROB-EVT-006", "ROB-EVT-007", "ROB-EVT-008"],
+    "rationale": "The login lacked MFA and key creation was denied; the full successful privilege-change pattern is absent."
+  },
+  {
+    "scenario_id": "ROB-006",
+    "expected_classification": "benign",
+    "severity": "low",
+    "expected_event_ids": ["ROB-EVT-009", "ROB-EVT-010"],
+    "rationale": "The events match the predefined MFA-protected login and read-only resource-listing pattern."
+  },
+  {
+    "scenario_id": "ROB-007",
+    "expected_classification": "suspicious",
+    "severity": "high",
+    "expected_event_ids": ["ROB-EVT-011", "ROB-EVT-012", "ROB-EVT-013"],
+    "rationale": "The scenario matches the predefined sequence of a login without MFA, successful access-key creation, and successful administrator-policy attachment."
+  },
+  {
+    "scenario_id": "ROB-008",
+    "expected_classification": "benign",
+    "severity": "low",
+    "expected_event_ids": ["ROB-EVT-014", "ROB-EVT-015"],
+    "rationale": "The events match the predefined MFA-protected backup-role and backup-activity pattern."
+  }
+]

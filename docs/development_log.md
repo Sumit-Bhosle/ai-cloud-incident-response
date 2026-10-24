@@ -140,3 +140,13 @@ The rules were designed around the current pilot scenarios. Ground-truth labels 
 - Evaluator: `python3 src/evaluation/evaluate_baseline.py`
 - Git commit: `1f6e7e3` — `Implement baseline investigation and evaluation`
 - Repository: https://github.com/Sumit-Bhosle/ai-cloud-incident-response
+
+### Entry 005 — Synthetic Robustness Diagnostic
+
+- Added an eight-scenario diagnostic dataset containing 15 synthetic events.
+- Added a reusable robustness evaluator at `src/evaluation/evaluate_robustness.py`.
+- Verified unique event IDs and consistent scenario/ground-truth coverage.
+- Observed 8/8 classification matches with the original baseline rules unchanged.
+- Corrected the evaluator to capture rule identifiers from the `matched_rule` field.
+- Documented the synthetic-data limitations and reproduction command in `docs/experiment_log.md`.
+- No real cloud logs, AI-assisted investigation, or real-world detection performance were evaluated in this milestone.

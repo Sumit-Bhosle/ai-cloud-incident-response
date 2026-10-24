@@ -145,3 +145,37 @@ not evidence of generalization to unseen incidents.
 - Define evaluation procedures for evidence grounding and unsupported claims.
 - Preserve this pilot result rather than silently replacing it when rules
   or data change.
+
+
+### Experiment 002 — Synthetic Robustness Diagnostic
+
+**Objective:** Check whether the existing rule-based baseline handles additional synthetic scenarios consistently with their predefined ground-truth labels.
+
+**Inputs:**
+- `data/robustness/events.jsonl`
+- `data/robustness/additional_events.jsonl`
+- `data/robustness/ground_truth.json`
+
+**Observed dataset:** 15 synthetic events across 8 scenarios. Ground-truth validation passed, with unique event IDs and matching scenario and label sets.
+
+**Method:** Applied the existing `investigate_scenario` function without modifying the baseline rules. Compared each predicted classification with its predefined expected classification. Corrected the evaluator to read the investigator's `matched_rule` field.
+
+**Observed results:**
+- Scenarios evaluated: 8
+- Classification matches: 8/8
+- Scenario-level agreement: 1.000 (100%)
+- ROB-001–ROB-005: all classified as `inconclusive`, matching their expected labels.
+- ROB-006: `benign`, matched by `BASELINE-RULE-002`.
+- ROB-007: `suspicious`, matched by `BASELINE-RULE-001`.
+- ROB-008: `benign`, matched by `BASELINE-RULE-003`.
+
+**Interpretation:** The baseline behaved as expected on these constructed diagnostic cases. Five cases assessed conservative handling of insufficient evidence; three reused patterns represented by the existing rules. This experiment does not establish generalization to unseen incidents or real cloud telemetry.
+
+**Limitations:** All events are synthetic and manually constructed. The additional recognized patterns are not an independent benchmark of unseen behavior. Scenario-level agreement does not measure evidence quality, analyst efficiency, response correctness, or AI-versus-baseline performance.
+
+**Reproduction command:**
+```bash
+python3 src/evaluation/evaluate_robustness.py
+```
+
+**Output:** `results/robustness/robustness_findings.json` (generated local artifact; not necessarily tracked by Git).
