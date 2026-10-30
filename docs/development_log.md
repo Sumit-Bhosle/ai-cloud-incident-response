@@ -161,3 +161,50 @@ The rules were designed around the current pilot scenarios. Ground-truth labels 
 - Identified observed limitations involving cross-identity event aggregation and detection coverage for successful administrative-policy changes.
 - Recorded the results and methodological limitations in `docs/experiment_log.md`.
 - No real cloud telemetry or AI-assisted investigation was evaluated in this milestone.
+
+### Entry 007 — Identity-Aware Deterministic Baseline V2
+
+**Date:** October 29, 2026
+**Status:** Implemented, locally tested, and committed; GitHub synchronization pending.
+
+**Objective:** Address limitations identified in Experiment 003 while preserving the original V1 implementation for reproducible comparison.
+
+**Implementation**
+- Added `src/investigation/baseline_v2.py`.
+- Implemented chronological event ordering using timestamps.
+- Added explicit actor-based correlation for ordered login, access-key creation, and administrative-policy attachment.
+- Added detection of successful administrative-policy attachments.
+- Added narrow benign-pattern recognition for the original synthetic pilot.
+- Added IP-associated pattern detection for records without explicit actor identities.
+- Preserved the distinction between IP association and verified actor identity.
+
+**Observed development tests**
+- FM-001: Correlated three-action pattern detected for user-alpha.
+- FM-002: Three separate actors identified; unrelated actions were not combined into one correlated sequence.
+- FM-003 and FM-005: Successful administrative-policy changes detected.
+- FM-004: Remained inconclusive.
+- Original pilot: 3/3 classifications matched provisional labels.
+- Failure-mode dataset: 5/5 classifications matched provisional labels.
+- Python compilation completed successfully.
+
+**Development observations**
+- Initial V2 implementation did not classify the original pilot correctly.
+- Narrow benign-pattern recognition and IP-associated correlation were subsequently added.
+- Final observed development-set agreement was 8/8 scenarios.
+
+**Limitations**
+- All scenarios are synthetic and manually authored.
+- V2 was developed using these same scenarios; the results are not independent validation.
+- A shared source IP does not establish actor identity.
+- Session continuity, authorization, and malicious intent remain unverified.
+- No AI-assisted investigation or human analyst-efficiency experiment has been conducted.
+
+**Version control**
+- Local Git commit: f109406
+- Commit message: Implement identity-aware deterministic baseline V2
+
+**Next steps**
+- Conduct independent synthetic holdout testing.
+- Implement reproducible V1/V2 comparison reporting.
+- Develop and evaluate the AI-assisted investigation workflow.
+- Prepare installation documentation and presentation demonstrations.

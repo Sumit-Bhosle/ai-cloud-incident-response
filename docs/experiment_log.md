@@ -214,3 +214,60 @@ python3 src/evaluation/evaluate_failure_modes.py
 ```
 
 **Output:** `results/failure_modes/failure_mode_findings.json`.
+
+### Experiment 004 — Baseline V1 versus V2 Development-Set Comparison
+
+**Date:** October 29, 2026
+
+**Objective:** Compare the original deterministic investigator with an identity-aware V2 candidate on existing synthetic development scenarios.
+
+**Inputs**
+- `data/raw/cloud_audit_events.jsonl`
+- `data/ground_truth/incident_labels.json`
+- `data/failure_modes/events.jsonl`
+- `data/failure_modes/ground_truth.json`
+
+**Method**
+- Preserved the original V1 implementation.
+- Developed V2 to address observed identity-correlation and privilege-change detection limitations.
+- Executed V2 against the original pilot and failure-mode datasets.
+- Compared observed scenario classifications with provisional labels.
+- Reviewed V1 results previously recorded for the same datasets.
+
+**Observed results**
+
+| Dataset | V1 matches | V2 matches |
+|---|---:|---:|
+| Original pilot | 3/3 | 3/3 |
+| Failure modes | 2/5 | 5/5 |
+| Combined | 5/8 | 8/8 |
+
+Combined development-set agreement:
+- V1: 62.5%
+- V2: 100%
+
+**Key findings**
+- FM-001: V2 identified a chronologically ordered, same-actor suspicious pattern.
+- FM-002: V2 returned inconclusive rather than combining three distinct actors into a single correlated incident.
+- FM-003 and FM-005: V2 identified successful administrative-policy changes associated with other activity by the same actor.
+- FM-004: V2 correctly retained an inconclusive classification.
+- SCN-002: V2 detected an IP-associated suspicious pattern while explicitly reporting that actor identity was not verified.
+- SCN-001 and SCN-003: V2 recognized the narrowly defined benign pilot patterns.
+
+**Interpretation**
+V2 matched more provisional development labels than V1 on these constructed scenarios. The changes address specific weaknesses exposed during development.
+
+**Limitations and threats to validity**
+- V2 was designed and revised using these same scenarios.
+- The observed 100% agreement is development-set fit, not an independent accuracy estimate.
+- Ground-truth labels are provisional and not independently reviewed.
+- The sample contains only eight scenarios across two datasets.
+- Classification agreement alone does not establish evidence quality, reliability, operational effectiveness, or analyst efficiency.
+- No AI-assisted model was evaluated.
+- Independent holdout testing remains necessary.
+
+**Reproducibility**
+- V1 implementation: `src/investigation/baseline_investigator.py`
+- V2 implementation: `src/investigation/baseline_v2.py`
+- V2 implementation commit: `f109406`
+- A dedicated automated comparison runner is planned but not yet implemented.
