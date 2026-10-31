@@ -208,3 +208,52 @@ The rules were designed around the current pilot scenarios. Ground-truth labels 
 - Implement reproducible V1/V2 comparison reporting.
 - Develop and evaluate the AI-assisted investigation workflow.
 - Prepare installation documentation and presentation demonstrations.
+
+### Entry 008 — Frozen Holdout Evaluation and Failure Analysis
+
+**Date:** October 30, 2026
+**Status:** Implemented and locally verified; final documentation commit pending.
+
+**Objective**
+Evaluate the unchanged deterministic V1 and V2 investigators on a separate synthetic holdout dataset.
+
+**Implementation**
+- Created `docs/holdout_test_plan.md` with 10 predefined investigation scenarios.
+- Added `src/ingestion/generate_holdout.py` to generate synthetic security events.
+- Generated 24 events in `data/holdout/events.jsonl`.
+- Created provisional classifications in `data/holdout/ground_truth.json`.
+- Validated event IDs, scenario coverage, and expected classifications.
+- Froze the dataset and labels in Git commit `d2f1535`.
+- Implemented `src/evaluation/evaluate_holdout.py`.
+- Preserved the original V1 and V2 investigation implementations.
+
+**Observed results**
+- V1: 7/10 matches (70%).
+- V2: 9/10 matches (90%).
+- V1 mismatches: HLD-003, HLD-005, HLD-010.
+- V2 mismatch: HLD-008.
+- Verified that the evaluation report is valid JSON.
+- Verified that the frozen dataset remained unchanged.
+
+**Development findings**
+- V2 avoided incorrect cross-actor correlations observed in V1.
+- V2 recognized a privilege-change scenario missed by V1.
+- V2 failed to recognize a longer benign read-only sequence.
+- V2 returned no supporting event IDs for its HLD-008 inconclusive finding.
+
+**Limitations**
+- Synthetic scenarios and provisional labels.
+- Small, researcher-designed test set.
+- No external independent benchmark.
+- No AI-assisted investigator or human analyst-efficiency evaluation yet.
+
+**Reproducibility**
+- Dataset freeze commit: `d2f1535`
+- Evaluator: `src/evaluation/evaluate_holdout.py`
+- Command: `python3 src/evaluation/evaluate_holdout.py`
+- Full findings: `docs/experiment_log.md`, Experiment 005.
+
+**Next steps**
+- Preserve V1/V2 and the recorded holdout results.
+- Develop a separate AI-assisted investigation workflow.
+- Evaluate evidence grounding, unsupported claims, reliability, and efficiency.

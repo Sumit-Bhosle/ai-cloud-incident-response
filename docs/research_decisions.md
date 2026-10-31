@@ -156,3 +156,24 @@ integration requirements.
 
 When a decision changes, record the date, previous decision, new decision,
 reason for change, and any effect on completed experiments or conclusions.
+
+---
+
+## RD-009 — Preserve Frozen Holdout Results and Version Future Improvements
+
+**Date:** October 30, 2026
+**Status:** Adopted
+
+**Decision:** Preserve the first-run Experiment 005 results, the frozen holdout dataset, and the existing deterministic V1/V2 investigators.
+
+**Rationale:** The observed mismatches are legitimate research findings. Modifying the investigators or test cases after observing results would undermine the interpretation of the original comparison.
+
+**Evidence:**
+- Frozen dataset commit: `d2f1535`.
+- V1 matched 7/10 provisional labels.
+- V2 matched 9/10 provisional labels.
+- V2 did not recognize the longer benign sequence in HLD-008.
+
+**Future development:** Any improved deterministic investigator must use a separate version and evaluation record. Reusing the existing holdout after inspecting its results must be identified as retrospective testing, not a new independent holdout.
+
+**Research boundary:** No AI-assisted system has been implemented or evaluated yet. The current results describe deterministic baseline behavior only.

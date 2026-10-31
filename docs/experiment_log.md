@@ -271,3 +271,65 @@ V2 matched more provisional development labels than V1 on these constructed scen
 - V2 implementation: `src/investigation/baseline_v2.py`
 - V2 implementation commit: `f109406`
 - A dedicated automated comparison runner is planned but not yet implemented.
+
+### Experiment 005 — Frozen Synthetic Holdout Comparison
+
+**Date:** October 30, 2026
+
+**Objective:** Compare the unchanged deterministic Baseline V1 and identity-aware Baseline V2 on a separate, frozen synthetic dataset and examine classification failures and evidence quality.
+
+**Inputs**
+- `data/holdout/events.jsonl`
+- `data/holdout/ground_truth.json`
+- `docs/holdout_test_plan.md`
+
+**Dataset**
+- 24 synthetic cloud-security events.
+- 10 scenarios.
+- Provisional expected labels: 3 benign, 5 inconclusive, 2 suspicious.
+- Dataset, labels, generator, and test plan frozen in Git commit `d2f1535` before the first holdout evaluation.
+
+**Method**
+- Preserved both investigator implementations without modification.
+- Used `src/evaluation/evaluate_holdout.py` to evaluate the same scenarios with V1 and V2.
+- Compared scenario classifications against the frozen provisional labels.
+- Inspected mismatches, matched rules, supporting event IDs, explanations, and limitations.
+- Verified that the frozen dataset files were unchanged after evaluation.
+
+**Observed results**
+
+| Investigator | Matches | Mismatches | Agreement |
+|---|---:|---:|---:|
+| Baseline V1 | 7/10 | 3 | 70% |
+| Baseline V2 | 9/10 | 1 | 90% |
+
+V2 achieved two additional classification matches, a 20-percentage-point difference on this dataset.
+
+**Failure analysis**
+- HLD-003: V1 incorrectly classified activity from three different actors as a correlated suspicious pattern. V2 returned inconclusive.
+- HLD-005: V1 missed a successful administrative-policy change associated with MFA-protected activity by the same actor. V2 classified it as suspicious.
+- HLD-008: V2 returned inconclusive for a longer benign read-only sequence. Its narrow benign-pattern rule did not recognize the sequence, and the returned finding contained no supporting event IDs. V1 classified it as benign.
+- HLD-010: V1 incorrectly combined activity from different actors sharing a source IP. V2 returned inconclusive.
+
+**Interpretation**
+The identity-aware V2 matched more provisional labels and avoided two cross-actor aggregation errors observed in V1. However, V2's narrow benign-pattern recognition caused it to withhold a benign classification on HLD-008. This was an inconclusive result, not a suspicious classification.
+
+**Limitations and threats to validity**
+- The dataset contains only 10 manually authored synthetic scenarios.
+- Expected classifications are provisional and have not been independently reviewed.
+- The study team designed the holdout scenarios with knowledge of the baseline rules.
+- Freezing the dataset before execution prevents silent post-result changes but does not establish external independence.
+- Scenario-level classification agreement is not equivalent to real-world detection accuracy.
+- Evidence quality, explanation quality, response correctness, and analyst efficiency require separate evaluation.
+- No AI-assisted investigator was evaluated in this experiment.
+
+**Reproducibility**
+- Frozen dataset commit: `d2f1535`
+- V1: `src/investigation/baseline_investigator.py`
+- V2: `src/investigation/baseline_v2.py`
+- Evaluator: `src/evaluation/evaluate_holdout.py`
+- Command: `python3 src/evaluation/evaluate_holdout.py`
+- Generated report: `results/holdout/holdout_findings.json` (local artifact excluded from Git tracking).
+
+**Follow-up**
+Preserve the observed HLD-008 failure in the Experiment 005 record. Any subsequent changes to benign-pattern recognition must be versioned and evaluated separately rather than treated as an improvement to this frozen first-run result.
