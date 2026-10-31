@@ -1,0 +1,52 @@
+[
+  {
+    "scenario_id": "HLD-001",
+    "expected_classification": "benign",
+    "rationale": "MFA-protected login followed by expected read-only resource access, with no observed privilege change."
+  },
+  {
+    "scenario_id": "HLD-002",
+    "expected_classification": "suspicious",
+    "rationale": "The same actor performs a successful no-MFA login, access-key creation, and administrative-policy attachment in timestamp order."
+  },
+  {
+    "scenario_id": "HLD-003",
+    "expected_classification": "inconclusive",
+    "rationale": "The login, key creation, and administrative-policy attachment belong to three different actors. Their relationship is unverified, although the privilege change requires review."
+  },
+  {
+    "scenario_id": "HLD-004",
+    "expected_classification": "inconclusive",
+    "rationale": "The administrative-policy attachment was denied. The available evidence does not establish a successful privilege change or malicious intent."
+  },
+  {
+    "scenario_id": "HLD-005",
+    "expected_classification": "suspicious",
+    "rationale": "The same actor performs a successful administrative-policy attachment following MFA-protected login and resource access. The privilege change warrants investigation."
+  },
+  {
+    "scenario_id": "HLD-006",
+    "expected_classification": "inconclusive",
+    "rationale": "A successful login without MFA is present, but additional evidence is insufficient to determine whether malicious activity occurred."
+  },
+  {
+    "scenario_id": "HLD-007",
+    "expected_classification": "benign",
+    "rationale": "The recorded MFA-protected backup-role assumption and backup operation match the expected synthetic backup workflow."
+  },
+  {
+    "scenario_id": "HLD-008",
+    "expected_classification": "benign",
+    "rationale": "The actor performs an MFA-protected login followed by several successful read-only operations without an observed privilege change."
+  },
+  {
+    "scenario_id": "HLD-009",
+    "expected_classification": "inconclusive",
+    "rationale": "A successful administrative-policy attachment requires review, but the available event alone does not establish malicious intent or surrounding context."
+  },
+  {
+    "scenario_id": "HLD-010",
+    "expected_classification": "inconclusive",
+    "rationale": "Three different actors share one source IP address. The shared IP does not establish common identity or coordination, although the administrative-policy attachment warrants review."
+  }
+]
