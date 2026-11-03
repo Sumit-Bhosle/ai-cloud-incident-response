@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Normalized Laboratory Security Event",
+  "description": "A standardized event linked to original laboratory evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "run_id",
+    "scenario_id",
+    "timestamp_utc",
+    "source_type",
+    "raw_evidence_path",
+    "raw_record_locator",
+    "event_type",
+    "observed_outcome"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}-EVT-[0-9]{3,}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "enum": [
+        "LAB-001",
+        "LAB-002",
+        "LAB-003",
+        "LAB-004",
+        "LAB-005"
+      ]
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "windows_event_log",
+        "linux_audit_log",
+        "wazuh_alert",
+        "cloud_audit_log",
+        "simulated_cloud_log",
+        "other"
+      ]
+    },
+    "raw_evidence_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "raw_record_locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_event_id": {
+      "type": ["string", "null"]
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "action": {
+      "type": ["string", "null"]
+    },
+    "actor": {
+      "type": ["string", "null"]
+    },
+    "target": {
+      "type": ["string", "null"]
+    },
+    "observed_outcome": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failed",
+        "unknown"
+      ]
+    },
+    "normalization_notes": {
+      "type": "string"
+    }
+  }
+}

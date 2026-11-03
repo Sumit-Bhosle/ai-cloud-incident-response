@@ -298,3 +298,35 @@ python3 -m unittest discover -s tests -p "test_*.py" -v
 - Implement cross-record evidence ID checks.
 - Prepare isolated laboratory collection.
 - Collect and verify genuine security telemetry.
+
+### Entry 010 — Normalized Security Event Schema
+
+**Date:** November 2, 2026
+**Status:** Implemented and locally tested.
+
+**Objective**
+Create a common event structure for future Windows,
+Linux, Wazuh, and cloud security telemetry.
+
+**Implementation**
+- Created schemas/normalized_event.schema.json.
+- Added event validation to validate_lab_record.py.
+- Preserved original source-log references.
+- Added three permanent normalized-event tests.
+
+**Observed results**
+- Valid event accepted.
+- Invalid UTC timestamp rejected.
+- Invalid event identifier rejected.
+- Complete automated test suite: 14/14 passed.
+
+**Limitations**
+- Only structural validation has been tested.
+- Cross-record references are not yet verified.
+- Genuine laboratory security logs have not yet been collected.
+- No AI-assisted investigator has been evaluated.
+
+**Next steps**
+- Implement cross-record evidence verification.
+- Configure the isolated security laboratory.
+- Collect genuine controlled security telemetry.

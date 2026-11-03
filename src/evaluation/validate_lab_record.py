@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCHEMAS = {
     "execution": ROOT / "schemas/lab_execution.schema.json",
     "ground_truth": ROOT / "schemas/ground_truth.schema.json",
+    "event": ROOT / "schemas/normalized_event.schema.json",
 }
 
 

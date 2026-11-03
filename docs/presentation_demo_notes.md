@@ -73,3 +73,39 @@ measure incident-detection accuracy.
 8. Discuss provenance and remaining limitations.
 
 Keep demonstrations separate from actual lab results.
+
+## Demo 03 — Normalized Security Event Records
+
+WHAT:
+A common JSON structure representing security
+events from different logging systems.
+
+WHY:
+Windows, Linux, Wazuh, and cloud audit systems
+produce different event formats.
+
+HOW:
+Normalize important fields such as event ID,
+run ID, timestamp, actor, action, outcome,
+and original evidence location.
+
+WHAT IT PRODUCES:
+Consistent machine-readable security events
+that retain references to original logs.
+
+VERIFICATION:
+Three normalized-event tests passed.
+Complete project test suite: 14/14 passed.
+
+RESEARCH BENEFIT:
+Supports event correlation, evidence traceability,
+explainability, and comparable investigations.
+
+LIMITATION:
+A structurally valid event may still reference
+missing evidence or contain an incorrect interpretation.
+
+DEMO:
+Show a valid normalized event, reject an invalid
+timestamp, and trace an event to its original
+evidence once real laboratory logs are available.
