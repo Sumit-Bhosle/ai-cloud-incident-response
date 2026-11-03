@@ -18,11 +18,11 @@
   "properties": {
     "event_id": {
       "type": "string",
-      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}-EVT-[0-9]{3,}$"
+      "pattern": "^(?:LAB-[0-9]{3}|PFL-001)-RUN-[0-9]{3}-EVT-[0-9]{3,}$"
     },
     "run_id": {
       "type": "string",
-      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+      "pattern": "^(?:LAB-[0-9]{3}|PFL-001)-RUN-[0-9]{3}$"
     },
     "scenario_id": {
       "type": "string",
@@ -31,7 +31,8 @@
         "LAB-002",
         "LAB-003",
         "LAB-004",
-        "LAB-005"
+        "LAB-005",
+        "PFL-001"
       ]
     },
     "timestamp_utc": {
@@ -46,7 +47,8 @@
         "wazuh_alert",
         "cloud_audit_log",
         "simulated_cloud_log",
-        "other"
+        "other",
+        "linux_journal"
       ]
     },
     "raw_evidence_path": {
@@ -58,20 +60,32 @@
       "minLength": 1
     },
     "source_event_id": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "event_type": {
       "type": "string",
       "minLength": 1
     },
     "action": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "actor": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "target": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "observed_outcome": {
       "type": "string",

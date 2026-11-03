@@ -172,3 +172,39 @@ equivalent to a real cloud attack.
 NEXT DEMO:
 Normalize the collected records and verify their
 relationships to the experiment documentation.
+
+## Demo 06 — Real Linux Log Normalization
+
+WHAT:
+A Python normalizer for genuine systemd journal records.
+
+WHY:
+Raw security logs must become structured,
+machine-readable events before automated investigation.
+
+HOW:
+Read original journal-export evidence, verify SHA-256,
+extract timestamps and authentication details,
+preserve journal cursors, and validate JSON records.
+
+ACTUAL OBSERVED OUTPUT:
+- PFL-001-RUN-001-EVT-001: authentication_failure
+- PFL-001-RUN-001-EVT-002: user_switch_failure
+
+VERIFICATION:
+- Two genuine records normalized.
+- JSON Schema validation passed.
+- Repeat execution reproduced identical output.
+- Full automated suite: 29/29 passed.
+
+DEMO COMMAND:
+python3 src/ingestion/normalize_linux_journal.py
+
+LIMITATIONS:
+Preflight-specific implementation.
+Not yet a general-purpose SIEM ingestion pipeline.
+Not evidence of an actual cyberattack.
+
+PRESENTATION VISUAL:
+Original log -> Normalizer -> Structured JSON
+-> Schema Validation -> Investigation Dataset

@@ -407,3 +407,47 @@ event and establish its evidence provenance.
 - Build normalized records for collected telemetry.
 - Validate evidence traceability end-to-end.
 - Prepare a sanitized, shareable research dataset.
+
+### Entry 013 — Genuine Linux Journal Normalization
+
+**Date:** November 3, 2026
+**Status:** Implemented and locally tested.
+
+**Objective**
+Convert genuine collected Linux authentication
+records into structured, traceable security events.
+
+**Implementation**
+- Extended the normalized-event schema with the
+  PFL-001 preflight namespace and linux_journal source.
+- Created src/ingestion/normalize_linux_journal.py.
+- Added support for text and binary journal-export fields.
+- Preserved original journal cursors and timestamps.
+- Converted timestamps to UTC.
+- Retained the original evidence-file reference.
+- Validated normalized records against JSON Schema.
+- Added seven permanent normalizer tests.
+
+**Observed Results**
+- Original evidence SHA-256 verification passed.
+- Two genuine journal records normalized.
+- Both normalized events passed schema validation.
+- Repeated execution produced identical output.
+- Complete automated test suite: 29/29 passed.
+- Sensitive evidence and normalized outputs remain
+  excluded from Git tracking.
+
+**Limitations**
+- This is authorized local authentication telemetry,
+  not evidence of a cloud compromise.
+- The normalizer currently targets one preflight run.
+- Formal execution-manifest and ground-truth
+  integration remains incomplete.
+- The normalized event references have not yet been
+  fully verified against a preflight manifest.
+
+**Next Steps**
+- Commit tested normalization implementation.
+- Integrate preflight execution and ground truth.
+- Run complete end-to-end evidence verification.
+- Prepare additional isolated laboratory experiments.

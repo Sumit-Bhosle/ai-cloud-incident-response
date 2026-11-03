@@ -78,5 +78,35 @@ class NormalizedEventTests(unittest.TestCase):
         self.assertIn("event_id", result.stdout)
 
 
+    def test_valid_preflight_journal_event(self):
+        event = copy.deepcopy(self.event)
+
+        event["event_id"] = "PFL-001-RUN-001-EVT-001"
+        event["run_id"] = "PFL-001-RUN-001"
+        event["scenario_id"] = "PFL-001"
+        event["source_type"] = "linux_journal"
+
+        result = self.validate(event)
+
+        self.assertEqual(
+            result.returncode,
+            0,
+            result.stdout + result.stderr
+        )
+
+    def test_invalid_preflight_scenario(self):
+        event = copy.deepcopy(self.event)
+
+        event["event_id"] = "PFL-001-RUN-001-EVT-001"
+        event["run_id"] = "PFL-001-RUN-001"
+        event["scenario_id"] = "PFL-999"
+        event["source_type"] = "linux_journal"
+
+        result = self.validate(event)
+
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("scenario_id", result.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()
