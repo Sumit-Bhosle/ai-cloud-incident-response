@@ -141,3 +141,34 @@ evidence supports the investigator's conclusion.
 DEMONSTRATION:
 Run a valid example, then reference an event that
 does not exist and show the verification failure.
+
+## Demo 05 — First Genuine Security-Log Collection
+
+SCENARIO:
+A controlled failed authentication attempt on Ubuntu.
+
+WHAT WE DID:
+Attempted to switch to root using an incorrect password.
+
+OBSERVED:
+Ubuntu recorded two authentication-related journal
+entries associated with the test process.
+
+COLLECTION:
+Exported the journal records in their original
+journal-export format.
+
+INTEGRITY:
+Calculated and reverified the SHA-256 fingerprint.
+
+RESEARCH PURPOSE:
+Demonstrates evidence collection and provenance
+before using collected logs for investigation.
+
+IMPORTANT LIMITATION:
+An authorized local authentication test is not
+equivalent to a real cloud attack.
+
+NEXT DEMO:
+Normalize the collected records and verify their
+relationships to the experiment documentation.

@@ -368,3 +368,42 @@ ground-truth annotations.
 - Configure an isolated security laboratory.
 - Collect genuine security events from controlled tests.
 - Validate evidence provenance before AI evaluation.
+
+### Entry 012 — First Genuine Linux Security Telemetry
+
+**Date:** November 3, 2026
+**Status:** Collected and integrity-checked.
+
+**Objective**
+Generate a controlled operating-system authentication
+event and establish its evidence provenance.
+
+**Experiment**
+- Performed one deliberately failed local root
+  user-switch authentication attempt.
+- Retrieved the corresponding systemd journal
+  records using the originating process ID.
+- Exported two original journal entries.
+- Recorded collection metadata and source details.
+- Calculated and reverified the SHA-256 fingerprint.
+- Restricted raw evidence access and excluded the
+  evidence directory from Git tracking.
+
+**Observed result**
+- Two genuine Linux journal records collected.
+- SHA-256 integrity recheck passed.
+- Evidence metadata recorded successfully.
+- No external attack or cloud incident was involved.
+
+**Limitations**
+- This was an authorized local preflight test.
+- The evidence has not yet been normalized.
+- Our cross-record verification pipeline has not
+  yet been run against this collected evidence.
+- Raw records may contain system identifiers and
+  must be reviewed before external sharing.
+
+**Next steps**
+- Build normalized records for collected telemetry.
+- Validate evidence traceability end-to-end.
+- Prepare a sanitized, shareable research dataset.

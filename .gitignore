@@ -23,3 +23,6 @@ results/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Raw laboratory security evidence (potentially sensitive)
+/data/lab_evidence/
