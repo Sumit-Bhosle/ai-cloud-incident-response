@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/ground_truth.schema.json",
+  "title": "Verified Laboratory Ground-Truth Annotation",
+  "description": "Independent incident annotation linked to a controlled laboratory execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "scenario_id",
+    "annotation_version",
+    "expected_classification",
+    "classification_rationale",
+    "supporting_event_ids",
+    "missing_evidence",
+    "expected_response",
+    "review_status"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "enum": [
+        "LAB-001",
+        "LAB-002",
+        "LAB-003",
+        "LAB-004",
+        "LAB-005"
+      ]
+    },
+    "annotation_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expected_classification": {
+      "type": "string",
+      "enum": [
+        "benign",
+        "suspicious",
+        "inconclusive"
+      ]
+    },
+    "classification_rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supporting_event_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expected_response": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "reviewed",
+        "locked"
+      ]
+    },
+    "reviewer": {
+      "type": ["string", "null"]
+    },
+    "reviewed_at_utc": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "review_notes": {
+      "type": "string"
+    }
+  }
+}

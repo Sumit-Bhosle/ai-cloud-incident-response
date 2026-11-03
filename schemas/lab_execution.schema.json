@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/lab_execution.schema.json",
+  "title": "Controlled Security Laboratory Execution Record",
+  "description": "Schema for documenting authorized laboratory actions and collected evidence. This is not a ground-truth classification record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "scenario_id",
+    "environment_type",
+    "started_at_utc",
+    "actions",
+    "evidence_artifacts"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "enum": [
+        "LAB-001",
+        "LAB-002",
+        "LAB-003",
+        "LAB-004",
+        "LAB-005"
+      ]
+    },
+    "environment_type": {
+      "type": "string",
+      "enum": [
+        "isolated_endpoint_lab",
+        "real_cloud_lab",
+        "cloud_simulation"
+      ]
+    },
+    "started_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at_utc": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "environment_notes": {
+      "type": "string"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "action_id",
+          "description",
+          "timestamp_utc",
+          "observed_outcome"
+        ],
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timestamp_utc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observed_outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "failed",
+              "unknown"
+            ]
+          },
+          "actor": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "verification_notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_type",
+          "file_path",
+          "sha256"
+        ],
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "windows_event_log",
+              "linux_audit_log",
+              "wazuh_alert",
+              "cloud_audit_log",
+              "simulated_cloud_log",
+              "other"
+            ]
+          },
+          "file_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "collection_notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
