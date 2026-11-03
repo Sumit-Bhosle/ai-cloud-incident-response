@@ -1,0 +1,75 @@
+# Research Presentation and Demonstration Notes
+
+Project: Evaluating AI-Assisted Cloud Security
+Incident Response
+
+## Demo 01 — Laboratory Record Validation
+
+WHAT:
+JSON Schemas define the expected structure of
+laboratory execution and ground-truth records.
+
+WHY:
+Inconsistent or incomplete research records could
+undermine incident investigation and evaluation.
+
+HOW:
+Python's jsonschema library checks required fields,
+data types, permitted values, and timestamp formats.
+
+WHAT IT PRODUCES:
+Validation results and field-specific error messages.
+
+VERIFICATION:
+Six automated tests, including deliberately invalid
+records and the corrected UTC timestamp checker.
+
+LIMITATION:
+Valid JSON records are not automatically truthful.
+
+## Demo 02 — SHA-256 Evidence Integrity
+
+WHAT:
+A mechanism for verifying whether recorded evidence
+files match their stored SHA-256 fingerprints.
+
+WHY:
+Changes to incident logs could alter the conclusions
+of baseline and AI-assisted investigations.
+
+HOW:
+Python hashes the evidence file and compares the
+calculated value with the manifest's recorded hash.
+
+WHAT IT PRODUCES:
+Pass/fail results identifying matching or modified files.
+
+VERIFICATION:
+Five automated tests covering valid evidence,
+modified evidence, missing files, unsafe paths,
+and empty evidence manifests.
+
+LIMITATION:
+A matching fingerprint does not prove that the
+original log was genuine or correctly collected.
+
+## Connection to the Research Question
+
+These components establish more reliable experiment
+inputs and support reproducible evaluation.
+
+They do not directly demonstrate AI superiority or
+measure incident-detection accuracy.
+
+## Professor Demonstration Plan
+
+1. Show an example laboratory record.
+2. Run schema validation.
+3. Show rejection of an invalid timestamp.
+4. Show an original evidence file and checksum.
+5. Modify a temporary demonstration file.
+6. Run the integrity verifier.
+7. Explain the detected mismatch.
+8. Discuss provenance and remaining limitations.
+
+Keep demonstrations separate from actual lab results.

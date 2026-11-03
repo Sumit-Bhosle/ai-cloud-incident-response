@@ -257,3 +257,44 @@ Evaluate the unchanged deterministic V1 and V2 investigators on a separate synth
 - Preserve V1/V2 and the recorded holdout results.
 - Develop a separate AI-assisted investigation workflow.
 - Evaluate evidence grounding, unsupported claims, reliability, and efficiency.
+
+### Entry 009 — Evidence Integrity Verification
+
+**Date:** November 2, 2026
+**Status:** Implemented and locally tested; Git commit pending.
+
+**Objective**
+Verify that collected laboratory evidence files have not
+changed relative to their recorded SHA-256 checksums.
+
+**Implementation**
+- Created `src/evaluation/verify_evidence.py`.
+- Implemented streaming SHA-256 file hashing.
+- Restricted evidence references to `data/lab_evidence/`.
+- Added detection of missing files, modified files,
+  unsafe paths, and empty evidence manifests.
+- Created five reproducible tests in
+  `tests/test_evidence_integrity.py`.
+
+**Observed results**
+- Evidence integrity tests: 5/5 passed.
+- Existing schema validation tests: 6/6 passed.
+- Total automated test suite: 11/11 passed.
+- Temporary demonstration evidence was removed
+  after testing.
+
+**Limitations**
+- Checksums detect differences from recorded file hashes.
+- They do not establish original evidence authenticity.
+- The verifier is not yet a complete cross-record validator.
+- Genuine laboratory security evidence has not yet
+  been collected or evaluated.
+
+**Reproduction**
+python3 -m unittest discover -s tests -p "test_*.py" -v
+
+**Next steps**
+- Document evidence-verification usage.
+- Implement cross-record evidence ID checks.
+- Prepare isolated laboratory collection.
+- Collect and verify genuine security telemetry.

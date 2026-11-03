@@ -175,3 +175,35 @@ and before relevant job interviews.
 
 Do not invent results, responsibilities, or
 technical accomplishments.
+
+### INT-008 — Security Evidence Integrity Verification
+
+Problem:
+Laboratory manifests could contain SHA-256 values,
+but schema validation alone could not establish
+whether the referenced evidence files were unchanged.
+
+Solution:
+Implemented a Python SHA-256 verifier using
+chunk-based hashing and restricted evidence paths.
+
+Testing:
+Created five automated tests covering matching
+checksums, modified files, missing files, unsafe
+paths, and empty evidence manifests.
+
+Observed result:
+All five evidence-integrity tests passed.
+The complete project test suite passed 11/11.
+
+Lesson:
+Evidence integrity requires checking actual file
+contents, not merely validating metadata format.
+
+Interview topics:
+Python, hashlib, file handling, cybersecurity,
+defensive programming, automated testing.
+
+Limitation:
+A matching checksum does not prove the original
+evidence was authentic.
