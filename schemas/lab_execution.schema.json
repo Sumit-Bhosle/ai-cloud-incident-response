@@ -16,7 +16,7 @@
   "properties": {
     "run_id": {
       "type": "string",
-      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+      "pattern": "^(?:LAB-[0-9]{3}|PFL-001)-RUN-[0-9]{3}$"
     },
     "scenario_id": {
       "type": "string",
@@ -25,7 +25,8 @@
         "LAB-002",
         "LAB-003",
         "LAB-004",
-        "LAB-005"
+        "LAB-005",
+        "PFL-001"
       ]
     },
     "environment_type": {
@@ -33,7 +34,8 @@
       "enum": [
         "isolated_endpoint_lab",
         "real_cloud_lab",
-        "cloud_simulation"
+        "cloud_simulation",
+        "local_endpoint_preflight"
       ]
     },
     "started_at_utc": {
@@ -41,7 +43,10 @@
       "format": "date-time"
     },
     "ended_at_utc": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "environment_notes": {
@@ -110,7 +115,8 @@
               "wazuh_alert",
               "cloud_audit_log",
               "simulated_cloud_log",
-              "other"
+              "other",
+              "linux_journal"
             ]
           },
           "file_path": {

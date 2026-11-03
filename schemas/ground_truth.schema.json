@@ -19,7 +19,7 @@
   "properties": {
     "run_id": {
       "type": "string",
-      "pattern": "^LAB-[0-9]{3}-RUN-[0-9]{3}$"
+      "pattern": "^(?:LAB-[0-9]{3}|PFL-001)-RUN-[0-9]{3}$"
     },
     "scenario_id": {
       "type": "string",
@@ -28,7 +28,8 @@
         "LAB-002",
         "LAB-003",
         "LAB-004",
-        "LAB-005"
+        "LAB-005",
+        "PFL-001"
       ]
     },
     "annotation_version": {
@@ -76,10 +77,16 @@
       ]
     },
     "reviewer": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "reviewed_at_utc": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time"
     },
     "review_notes": {

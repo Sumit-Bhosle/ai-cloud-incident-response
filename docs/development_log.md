@@ -451,3 +451,49 @@ records into structured, traceable security events.
 - Integrate preflight execution and ground truth.
 - Run complete end-to-end evidence verification.
 - Prepare additional isolated laboratory experiments.
+
+### Entry 014 — End-to-End Real Evidence Verification
+
+**Date:** November 3, 2026
+**Status:** Implemented and successfully tested.
+
+**Objective**
+Connect genuine Linux security evidence to the
+execution manifest, normalized events, and draft
+ground-truth annotation.
+
+**Implementation**
+- Extended execution and ground-truth schemas
+  to recognize the PFL-001 preflight experiment.
+- Added local_endpoint_preflight environment type.
+- Created the reusable verify_preflight_trace.py tool.
+- Linked original Linux journal evidence to two
+  normalized security events.
+- Verified SHA-256 integrity and source journal cursors.
+- Checked cross-record identities and evidence references.
+- Added six permanent end-to-end verification tests.
+
+**Observed results**
+- Genuine Linux journal records: 2.
+- Normalized events: 2.
+- Supporting evidence references: 2/2 verified.
+- Original evidence integrity: PASSED.
+- Journal-to-event reconstruction: PASSED.
+- End-to-end preflight verification: PASSED.
+- Complete automated test suite: 35/35 PASSED.
+
+**Research limitations**
+- This was an authorized local authentication test.
+- It does not represent a genuine cloud compromise.
+- Ground-truth review status remains draft.
+- Evidence integrity does not independently establish
+  authenticity or malicious intent.
+- Current tools remain partially preflight-specific.
+- Raw evidence is kept outside public Git tracking.
+
+**Next research phase**
+- Inspect and configure VMware network isolation.
+- Establish an isolated SOC monitoring environment.
+- Evaluate Wazuh deployment compatibility and resources.
+- Generate additional authorized security telemetry.
+- Prepare sanitized datasets and reproducible demos.

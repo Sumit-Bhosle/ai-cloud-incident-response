@@ -207,3 +207,34 @@ defensive programming, automated testing.
 Limitation:
 A matching checksum does not prove the original
 evidence was authentic.
+
+## INT-009 — Schema Contract Mismatch
+
+**Situation**
+While integrating genuine Linux evidence with the
+experiment manifest, our Python-generated record
+failed JSON Schema validation.
+
+**Problem**
+The implementation used the field name "id", but
+the existing schema required "action_id".
+
+**Action**
+Inspected the validation error, corrected the
+generated record to match the existing schema,
+and reran the complete verification pipeline.
+
+**Result**
+Manifest validation and cross-record verification
+passed. The end-to-end evidence checks succeeded,
+and the full automated suite reached 35/35 passing tests.
+
+**Engineering lesson**
+Structured data contracts must remain consistent
+across producers, validators, and downstream consumers.
+Fail-fast validation prevents invalid research records
+from silently entering the dataset.
+
+**Interview relevance**
+Python, JSON Schema, debugging, data integrity,
+integration testing, and reproducibility.

@@ -208,3 +208,46 @@ Not evidence of an actual cyberattack.
 PRESENTATION VISUAL:
 Original log -> Normalizer -> Structured JSON
 -> Schema Validation -> Investigation Dataset
+
+## Demo 07 — Complete Security Evidence Verification
+
+SCENARIO:
+Controlled failed root authentication on Ubuntu.
+
+WORKING PIPELINE:
+Authentication attempt
+-> Original Linux journal
+-> SHA-256 verification
+-> Python event normalization
+-> Execution manifest
+-> Draft ground truth
+-> Cross-record verification
+-> Source-record reconstruction
+
+LIVE DEMONSTRATION COMMAND:
+python3 src/evaluation/verify_preflight_trace.py
+
+TEST COMMAND:
+python3 -m unittest discover -s tests -p "test_*.py" -v
+
+ACTUAL RESULTS:
+- Two genuine journal records.
+- Two normalized security events.
+- 2/2 supporting event references verified.
+- End-to-end evidence trace passed.
+- 35/35 automated tests passed.
+
+PRESENTATION EXPLANATION:
+The system verifies that normalized investigation
+records can be reconstructed from preserved security
+logs and consistently linked to experiment annotations.
+
+RESEARCH LIMITATIONS:
+This is a local authorized preflight experiment.
+It is not cloud attack detection or AI evaluation.
+Ground truth is still draft.
+
+VIDEO PLAN:
+Show the original evidence, JSON events, manifest,
+ground truth, and verification output.
+Use sanitized records for external sharing.
