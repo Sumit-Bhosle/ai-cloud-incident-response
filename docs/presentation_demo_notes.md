@@ -109,3 +109,35 @@ DEMO:
 Show a valid normalized event, reject an invalid
 timestamp, and trace an event to its original
 evidence once real laboratory logs are available.
+
+## Demo 04 — Cross-Record Evidence Verification
+
+WHAT:
+A Python program that checks consistency between
+execution records, normalized events, and ground truth.
+
+WHY:
+Investigation findings must not cite nonexistent
+events or mix evidence from different experiments.
+
+HOW:
+Compare run IDs, scenario IDs, unique event IDs,
+and declared raw-evidence references.
+
+WHAT IT PRODUCES:
+Pass/fail results identifying broken references.
+
+VERIFICATION:
+Six dedicated tests passed.
+Complete project test suite: 20/20 passed.
+
+RESEARCH BENEFIT:
+Supports evidence traceability and reproducibility.
+
+LIMITATION:
+A valid reference does not automatically mean the
+evidence supports the investigator's conclusion.
+
+DEMONSTRATION:
+Run a valid example, then reference an event that
+does not exist and show the verification failure.

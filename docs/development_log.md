@@ -330,3 +330,41 @@ Linux, Wazuh, and cloud security telemetry.
 - Implement cross-record evidence verification.
 - Configure the isolated security laboratory.
 - Collect genuine controlled security telemetry.
+
+### Entry 011 — Cross-Record Evidence Verification
+
+**Date:** November 2, 2026
+**Status:** Implemented and locally tested.
+
+**Objective**
+Verify consistency between laboratory execution
+manifests, normalized security events, and
+ground-truth annotations.
+
+**Implementation**
+- Created src/evaluation/verify_record_links.py.
+- Added cross-record verification for run IDs,
+  scenario IDs, and event identifiers.
+- Added checks for duplicate and missing event IDs.
+- Verified that normalized events reference evidence
+  paths declared in the execution manifest.
+- Created six automated tests in
+  tests/test_record_links.py.
+
+**Observed results**
+- All six cross-record verification tests passed.
+- Complete automated test suite: 20/20 passed.
+- Existing investigation baselines were unchanged.
+
+**Limitations**
+- Verification checks references and consistency.
+- It does not independently verify source-log contents.
+- It does not establish whether cited evidence supports
+  a particular security conclusion.
+- Genuine laboratory telemetry has not yet been collected.
+
+**Next steps**
+- Commit and preserve the implementation.
+- Configure an isolated security laboratory.
+- Collect genuine security events from controlled tests.
+- Validate evidence provenance before AI evaluation.
