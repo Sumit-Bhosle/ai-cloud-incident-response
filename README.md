@@ -73,3 +73,21 @@ Initial repository and research dataset preparation.
 
 The architecture and methodology may evolve as the literature review,
 compatibility checks, and pilot experiments are completed.
+
+## Visual SOC laboratory walkthrough
+
+![Observed monitoring pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
+
+### Real monitoring demonstration (authorized local test)
+
+![Ubuntu authentication experiment](docs/assets/screenshots/03-ubuntu-controlled-authentication.png)
+
+![Wazuh detection results](docs/assets/screenshots/04-wazuh-raw-alert-query.png)
+
+| Wazuh rule 5503: failed PAM login | Wazuh rule 5301: failed user switch |
+|---|---|
+| ![5503](docs/assets/screenshots/05-threat-hunting-rule-5503.png) | ![5301](docs/assets/screenshots/06-threat-hunting-rule-5301.png) |
+
+The observed local Ubuntu experiment generated two system-journal authentication entries which Wazuh 4.14.9 collected and matched to level-5 rules 5503 and 5301. Both alerts appeared in Threat Hunting. **This is an authorized local test, not a real adversary attack or completed LLM evaluation.**
+
+[View all six original screenshots and provenance notes](docs/assets/README.md).

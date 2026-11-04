@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820" role="img" aria-label="Wazuh security monitoring and research evidence pipeline, with completed and planned parts">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#091728"/><stop offset="1" stop-color="#12364d"/></linearGradient><linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#153047"/><stop offset="1" stop-color="#14394a"/></linearGradient><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#48dfcb"/></marker></defs>
+<rect width="1600" height="820" rx="32" fill="url(#bg)"/>
+<rect x="58" y="48" width="8" height="77" rx="4" fill="#40e2cb"/>
+<text x="88" y="89" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#f1f8ff">From a Linux login to a verified SOC alert</text>
+<text x="88" y="125" font-family="Arial, sans-serif" font-size="20" fill="#a4c4d4">Observed in the Ubuntu + Wazuh laboratory on November 3, 2026</text>
+<rect x="1250" y="75" width="280" height="44" rx="22" fill="#164e49" stroke="#42d5ba" stroke-width="2"/><text x="1390" y="103" text-anchor="middle" fill="#7ff6df" font-size="18" font-family="Arial, sans-serif" font-weight="bold">TESTED &amp; VERIFIED</text>
+<!-- step row -->
+<g font-family="Arial,sans-serif">
+<rect x="65" y="207" width="268" height="218" rx="20" fill="url(#tile)" stroke="#397589" stroke-width="2"/>
+<text x="91" y="248" font-size="18" fill="#62ecd4" font-weight="700">01  TEST ACTION</text><text x="91" y="301" font-size="27" fill="#fff" font-weight="700">su - root</text><text x="91" y="341" font-size="20" fill="#cadce7">Wrong password</text><text x="91" y="379" font-size="18" fill="#8eafc0">Authorized local test</text>
+<path d="M344 317 H379" stroke="#48dfcb" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="394" y="207" width="268" height="218" rx="20" fill="url(#tile)" stroke="#397589" stroke-width="2"/>
+<text x="420" y="248" font-size="18" fill="#62ecd4" font-weight="700">02  RAW TELEMETRY</text><text x="420" y="301" font-size="25" fill="#fff" font-weight="700">Linux journald</text><text x="420" y="341" font-size="20" fill="#cadce7">2 genuine records</text><text x="420" y="379" font-size="18" fill="#8eafc0">Process ID 65529</text>
+<path d="M672 317 H707" stroke="#48dfcb" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="722" y="207" width="268" height="218" rx="20" fill="url(#tile)" stroke="#397589" stroke-width="2"/>
+<text x="748" y="248" font-size="18" fill="#62ecd4" font-weight="700">03  SIEM ANALYSIS</text><text x="748" y="301" font-size="25" fill="#fff" font-weight="700">Wazuh 4.14.9</text><text x="748" y="341" font-size="20" fill="#cadce7">Rules 5503 + 5301</text><text x="748" y="379" font-size="18" fill="#8eafc0">Both level 5</text>
+<path d="M1000 317 H1035" stroke="#48dfcb" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="1050" y="207" width="485" height="218" rx="20" fill="url(#tile)" stroke="#397589" stroke-width="2"/>
+<text x="1076" y="248" font-size="18" fill="#62ecd4" font-weight="700">04  ALERTS + ANALYST VIEW</text><text x="1076" y="301" font-size="25" fill="#fff" font-weight="700">alerts.json + Threat Hunting</text><text x="1076" y="341" font-size="20" fill="#cadce7">Both matching alerts found</text><text x="1076" y="379" font-size="18" fill="#8eafc0">Terminal and dashboard evidence</text>
+<path d="M1290 425 V462" stroke="#48dfcb" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="725" y="478" width="810" height="135" rx="20" fill="#14383f" stroke="#4ab9af" stroke-width="2"/>
+<text x="755" y="518" font-size="18" fill="#62ecd4" font-weight="700">05  RESEARCH EVIDENCE PIPELINE — NEXT FOR WAZUH RUN 002</text><text x="755" y="556" font-size="23" fill="#fff" font-weight="700">Private alert export → SHA-256 → normalization → ground truth</text><text x="755" y="588" font-size="18" fill="#b7d6de">Run 001 fully traced; Run 002 needs complete dataset linking.</text>
+<path d="M717 551 H681" stroke="#d7aa58" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+<rect x="65" y="478" width="600" height="135" rx="20" fill="#2a2931" stroke="#cda461" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="90" y="518" font-size="18" fill="#ffd08c" font-weight="700">FUTURE — AI-ASSISTED INVESTIGATION</text><text x="90" y="556" font-size="23" fill="#fff" font-weight="700">MITRE / NIST → RAG + LLM → Human report</text><text x="90" y="588" font-size="18" fill="#dec9ac">Compare with manual SOC across four research pillars.</text>
+<line x1="65" y1="688" x2="1535" y2="688" stroke="#3c6070" stroke-width="1"/>
+<text x="65" y="723" font-size="18" fill="#b9d6e0">Solid teal = observed/tested     |     Dashed amber = planned     |     Not a real-world attack or proof of AI accuracy</text>
+<text x="65" y="765" font-size="17" fill="#85aab8">Project: Evaluating AI-Assisted Cloud Security Incident Response  •  Research milestone visual</text>
+</g></svg>
