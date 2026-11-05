@@ -251,3 +251,34 @@ VIDEO PLAN:
 Show the original evidence, JSON events, manifest,
 ground truth, and verification output.
 Use sanitized records for external sharing.
+
+<!-- DEMO-2026-11-04-AI-CLOUD -->
+
+## Demo 08 — Source-code walkthrough: Wazuh → LLM/RAG → CloudTrail cases (prototype)
+
+**Opening explanation:** "Wazuh detects observed security activity. Python structures and verifies the event data. A local Ollama language model generates a draft investigation. Our retrieval module supplies curated security guidance, while validation checks the JSON structure and whether cited IDs exist. The research then evaluates when these drafts are correct, unsupported or misleading."
+
+| Stage | Show this code | Demonstration / professor's likely question |
+| :-- | :-- | :-- |
+| Wazuh loader and normalizer | `src/ingestion/normalize_wazuh_alerts.py` | How are alerts loaded and mapped to a common schema? |
+| Local AI investigator | `src/investigation/ai_investigator.py` | Which model, prompt, fields, parameters and local API are used? |
+| RAG retrieval | `src/investigation/rag_investigator.py` | How do token overlap and top-k selection choose MITRE guidance? |
+| Model input/output comparison | `src/evaluation/compare_rag_conditions.py` | How do we hold the prompt/model fixed and change retrieval context? |
+| CloudTrail case builder | `src/ingestion/build_cloudtrail_cases.py` | How do we keep labels separate and group related events? |
+| Regression suite | `tests/` | Which 42 historical tests pass, and which new-module tests are still required? |
+
+**Rehearsal commands (only in configured local lab):**
+
+```bash
+python3 -m src.ingestion.normalize_wazuh_alerts
+python3 -m src.investigation.ai_investigator
+python3 -m src.investigation.rag_investigator
+python3 -m src.ingestion.build_cloudtrail_cases
+python3 -m unittest discover -s tests
+```
+
+**Avoid during live demonstration:** The controlled comparison script refuses to overwrite an existing private output. It is not a repeatable one-command demo until output management is improved. Don't delete research outputs merely to re-run it.
+
+**Evidence clips/screenshots:** Reuse the six genuine images in `docs/assets/screenshots/` and the original PNG/SVG in `docs/assets/diagrams/`. Show actual on-screen source and output; never imply the currently planned cloud-case-to-LLM connection or claim-level verifier is already implemented.
+
+**Professor-run deliverable remaining:** Sanitized portable input, supported Python version/dependencies, Ollama model availability/fallback clarity, concise start script, executable test suite, user guide, video, PPT and final report.

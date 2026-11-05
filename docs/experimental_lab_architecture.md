@@ -148,3 +148,17 @@ Pending:
 Determine an achievable allocation for the attacker,
 monitored target, and evidence collector before
 creating or configuring additional virtual machines.
+
+<!-- LABARCH-2026-11-04-AI-CLOUD -->
+
+## AI architecture extension — 2026-11-04
+
+**Verified lab:** VMware Ubuntu VM → systemd journal → Wazuh Manager/Indexer/Dashboard → exported JSON Wazuh alerts → `normalize_wazuh_alerts.py`. Ollama/Qwen2.5 runs locally (CPU-only) and has generated JSON investigations from normalized Wazuh evidence.
+
+**Current research software:** A keyword-overlap retriever selects up to three curated MITRE/NIST notes for LLM context. JSON Schema checks report structure and membership checks confirm cited evidence/reference IDs only; it does not check whether natural-language conclusions are supported.
+
+**Development cloud workflow:** Separate AWS CloudTrail training ZIP → `build_cloudtrail_cases.py` → private `cases.jsonl` + segregated ground truth. Initial grouping by actor, source IP and 30-minute bin is provisional, and the case builder does not yet call the LLM. Public documentation must not expose the actual raw evidence.
+
+**Target next integration:** Case evidence → improved correlation and retrieval → local LLM analysis → fact/citation-support checks → analyst-reviewable SOC report → fair event/case-level evaluation. CloudTrail and live Wazuh are different data sources; do not imply our local Wazuh experiment is itself a cloud attack.
+
+See [AI architecture and source-code walkthrough](ai_architecture.md).

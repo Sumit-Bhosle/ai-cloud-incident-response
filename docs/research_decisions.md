@@ -177,3 +177,19 @@ reason for change, and any effect on completed experiments or conclusions.
 **Future development:** Any improved deterministic investigator must use a separate version and evaluation record. Reusing the existing holdout after inspecting its results must be identified as retrospective testing, not a new independent holdout.
 
 **Research boundary:** No AI-assisted system has been implemented or evaluated yet. The current results describe deterministic baseline behavior only.
+
+<!-- DECISION-2026-11-04-AI-CLOUD -->
+
+## Research design decision — 2026-11-04 | AI-first incident investigation, not SIEM-only
+
+**Decision:** Wazuh remains a verified monitoring/detection input; the project's evaluated research contribution is the **evidence-grounded AI investigation** workflow, not a new SIEM implementation.
+
+**Dataset design:** Use controlled Linux/Wazuh evidence to demonstrate live ingestion and use labeled AWS CloudTrail records for cloud-security evaluation. Use the provided development split for architecture iteration and hold the designated test split for final evaluation. Disclose that test-set summary statistics were inspected during development.
+
+**Unit of analysis:** Track event-level input and case-level investigation separately. Do not call 2,585 attack-labeled log records 2,585 independent compromises. First correlation heuristic is `actor + source IP + 30-minute window`; validate its splits/merges before claiming incident grouping quality.
+
+**Study conditions:** Preserve deterministic rule baselines, run LLM-only and RAG-assisted methods under controlled comparable settings, and use independent human review where available. Ground truth is held separately from LLM/RAG prompts.
+
+**Trust boundary:** Model responses are recommendations requiring review; no automated destructive remediation. A valid schema, matching event IDs, or retrieved MITRE ID is not sufficient proof of a supported conclusion. Add claim-level validation and abstention assessment.
+
+**Professor reproducibility:** Build a sanitized portable dataset, documented installation requirements, one-command demo, source-code walkthrough, and video/PPT showing exactly which functions cause each stage. Existing dev scripts still depend on private evidence and Ollama; this deliverable is pending.

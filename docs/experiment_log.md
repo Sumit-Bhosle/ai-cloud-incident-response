@@ -333,3 +333,25 @@ The identity-aware V2 matched more provisional labels and avoided two cross-acto
 
 **Follow-up**
 Preserve the observed HLD-008 failure in the Experiment 005 record. Any subsequent changes to benign-pattern recognition must be versioned and evaluated separately rather than treated as an improvement to this frozen first-run result.
+
+<!-- EXPLOG-2026-11-04-AI-CLOUD -->
+
+## Experimental checkpoint — 2026-11-04 | LLM, RAG, and CloudTrail preprocessing
+
+| Trial | Input | Observed outcome | Interpretation / limitation |
+| :-- | :-- | :-- | :-- |
+| Local Ollama inference | Manually stated authorized `su` preflight | Qwen2.5 1.5B generated a security explanation | Proves local inference, not automated evidence ingestion |
+| Python LLM investigator | 2 genuine Wazuh-derived normalized events from `PFL-001-RUN-002` | Schema-valid report; `suspicious`; both event IDs cited | Known authorized activity misclassified; citations were identifiers only |
+| Prompt revision | Same Wazuh context | Still classified `suspicious` | Prompt tuning did not resolve observed error |
+| Initial keyword RAG | Same evidence plus selected MITRE notes | Retrieval succeeded; `suspicious`; suggested possible brute force | Retrieved knowledge does not prove attack behavior |
+| Same-prompt LLM-only vs RAG | Same model, generation settings, evidence, prompt; retrieved docs only in RAG arm | Both returned `suspicious`; RAG `knowledge_ids: []` | One non-blind case; does **not** show RAG improves accuracy |
+| CloudTrail development case build | 4,216 training records | 1,742 cases; 64 attack-associated; 4 mixed-label; 0 repeated source IDs | Actor + IP + 30-minute heuristic is not validated ground-truth incident grouping |
+| CloudTrail test audit | 24,087 designated test records | 2,585 attack-labeled; 21,502 benign; 10 attack scenario categories; 8 repeated source ID occurrences | Inspection only; no held-out AI performance measured |
+
+### Research integrity controls
+
+- Original `su` records and two Wazuh alerts represent a **single authorized test operation**, not two independent attack attempts. The preflight isn't a real cloud compromise.
+- `should_sample` and `attack_name` are dataset labels; private label files stay outside the model's case evidence. **This is a preliminary separation check, not an exhaustive information-leakage audit.**
+- A passing JSON schema / known citation-ID check doesn't prove claims are true, and a retrieved MITRE technique isn't a confirmed incident.
+- No precision, recall, F1, latency benefit, analyst-efficiency improvement, or model reliability figure has yet been established for these cloud cases.
+- Exact tool outputs and raw data remain in Git-ignored local research evidence; publish sanitized results only after review.

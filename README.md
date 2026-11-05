@@ -91,3 +91,74 @@ compatibility checks, and pilot experiments are completed.
 The observed local Ubuntu experiment generated two system-journal authentication entries which Wazuh 4.14.9 collected and matched to level-5 rules 5503 and 5301. Both alerts appeared in Threat Hunting. **This is an authorized local test, not a real adversary attack or completed LLM evaluation.**
 
 [View all six original screenshots and provenance notes](docs/assets/README.md).
+
+<!-- MILESTONE-2026-11-04-AI-CLOUD-START -->
+
+---
+
+## 🧠 AI-assisted cloud investigation | November 2026 milestone
+
+![Research prototype](https://img.shields.io/badge/AI-RAG%20prototype-2477B4)
+![Tests at last run](https://img.shields.io/badge/Regression%20tests-42%20passed-188A61)
+![CloudTrail](https://img.shields.io/badge/CloudTrail-24%2C087%20test%20events-7057B2)
+![Status](https://img.shields.io/badge/Research-preliminary-E6A23C)
+
+> **Research objective:** Evaluate whether AI assistance improves the accuracy, reliability, explainability, and analyst efficiency of cloud-security incident investigations. This is a research prototype, **not** a production-grade SOC or an autonomous remediation system.
+
+### Architecture: what runs today and what is still being built
+
+```mermaid
+flowchart TD
+  A[Wazuh alerts / AWS CloudTrail evidence] --> B[Read + normalize + preserve evidence IDs]
+  B --> C[Heuristic correlation into investigation cases]
+  C --> D[Event context supplied to local Ollama LLM]
+  K[Curated MITRE / NIST reference notes] --> R[Keyword-based knowledge retrieval]
+  R --> D
+  D --> E[Structured JSON investigation report]
+  E --> F[Schema + citation-ID validation]
+  F --> G[Human analyst review]
+  T[(Separate private ground truth)] --> H[Research evaluation]
+  G --> H
+  F -.-> V[Planned: claim-level grounding verification]
+  style D fill:#DCE9FA,stroke:#3576BA,color:#112E4C
+  style H fill:#E7F4EC,stroke:#33845C,color:#174B32
+  style V fill:#FFF2D9,stroke:#C38422,color:#5C421A
+```
+
+**Architecture note:** The current CloudTrail case builder and Wazuh/RAG prototypes execute separately; the complete **CloudTrail case → LLM → evaluation** workflow is still being integrated. Arrows above describe the target research flow, not proof of end-to-end production readiness.
+
+![Verified SOC evidence pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
+
+The [original SOC visual walkthrough](#visual-soc-laboratory-walkthrough) and six authentic lab screenshots are preserved. See [AI architecture and code walkthrough](docs/ai_architecture.md) for module responsibilities, inputs, limitations, and runnable commands.
+
+### Evidence-backed engineering progress
+
+| Capability | Latest verified evidence | State |
+| :-- | :-- | :-- |
+| Live Wazuh monitoring | Two `su` alerts (rules `5503`, `5301`) and dashboard screenshots | Verified |
+| Evidence integrity and Wazuh normalization | SHA-256 checked; two normalized Wazuh events | Verified |
+| Local LLM | Qwen2.5 1.5B inference through Ollama | Prototype executed |
+| Retrieval-augmented inference | Keyword retrieval + LLM JSON reports | Prototype executed |
+| Controlled LLM/RAG comparison | Same-prompt single-case exploratory run | Executed, **no accuracy claim** |
+| CloudTrail development preprocessing | **4,216 events → 1,742 heuristic cases**, including 64 attack-associated cases and 4 mixed-label cases | Executed and checked |
+| Held-out CloudTrail test-set audit | **24,087 events**, 2,585 attack-labeled / 21,502 benign, 10 scenario categories | Audited, **not benchmarked** |
+| Python regression suite | **42 tests passing** at last execution | Existing suite passes; new modules need targeted tests |
+
+**Key research finding so far:** Both controlled LLM-only and RAG variants marked a known authorized authentication preflight as `suspicious`; the controlled RAG report cited zero knowledge references despite retrieving them. Format-valid JSON and matching citation IDs **do not establish factual accuracy**. One `su` attempt produced two alerts; it is not evidence of two distinct attacks.
+
+### Source code and demonstrations
+
+| Component | Source | Current demonstration |
+| :-- | :-- | :-- |
+| Wazuh evidence normalization | [`normalize_wazuh_alerts.py`](src/ingestion/normalize_wazuh_alerts.py) | `python3 -m src.ingestion.normalize_wazuh_alerts` |
+| Local LLM investigation | [`ai_investigator.py`](src/investigation/ai_investigator.py) | `python3 -m src.investigation.ai_investigator` |
+| RAG investigation | [`rag_investigator.py`](src/investigation/rag_investigator.py) | `python3 -m src.investigation.rag_investigator` |
+| Exploratory LLM/RAG comparison | [`compare_rag_conditions.py`](src/evaluation/compare_rag_conditions.py) | Single-case run already performed; private output not published |
+| CloudTrail preprocessing | [`build_cloudtrail_cases.py`](src/ingestion/build_cloudtrail_cases.py) | `python3 -m src.ingestion.build_cloudtrail_cases` |
+| Python regression tests | [`tests/`](tests/) | `python3 -m unittest discover -s tests` |
+
+**Execution dependencies:** These are development commands, **not yet a one-click independent demo**. Ollama plus the locally downloaded `qwen2.5:1.5b` model is required for LLM runs. Evidence ZIPs and Wazuh JSONL records stay under the Git-ignored `data/lab_evidence/` directory and are not distributed publicly. A sanitized, self-contained professor demonstration and installation guide remain on the roadmap.
+
+**Research navigation:** [Development log](docs/development_log.md) · [Experiment log](docs/experiment_log.md) · [Dataset card](docs/dataset_card.md) · [Research decisions](docs/research_decisions.md) · [Presentation/demo notes](docs/presentation_demo_notes.md) · [November 4 checkpoint](docs/checkpoints/2026-11-04_research_checkpoint.md)
+
+<!-- MILESTONE-2026-11-04-AI-CLOUD-END -->

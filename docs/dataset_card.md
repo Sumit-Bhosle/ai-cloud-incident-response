@@ -51,3 +51,22 @@ This regenerates the synthetic event and ground-truth files.
 - Define scoring rules for accuracy, evidence grounding, unsupported claims, and investigation time.
 - Independently review ground-truth labels before formal experiments.
 - Record dataset and experiment versions for reproducibility.
+
+<!-- DATASETCARD-2026-11-04-CLOUDTRAIL -->
+
+## Added dataset profile — AWS CloudTrail labeled research events (2026-11-04 audit)
+
+**Upstream:** [Ariel Cyber — cloud_log_sampling](https://github.com/ArielCyber/cloud_log_sampling) (AWS-generated CloudTrail activity from a controlled research environment). Raw ZIPs are stored privately under `data/lab_evidence/cloudtrail/`; review upstream license and dataset description before redistribution.
+
+| Split | Total records | Attack-labeled | Benign | Usage |
+| :-- | --: | --: | --: | :-- |
+| Development (`TrainOn/train_labeled_a.zip`) | **4,216** | Not separately recorded in current checkpoint | Not separately recorded | Case correlation and architecture iteration |
+| Test (`TestOn/labeled_cloudtrail_a.zip`) | **24,087** | **2,585** | **21,502** | Audited, reserved for later held-out evaluation |
+
+Test ZIP SHA-256: `d5dce3dbdb61ffb935e16cb4728aaca933daa42201a672dfad7387fd168f6eb0`.
+
+**Test distribution:** 10 attack scenario categories, dominated by bulk S3 Put/Get/Delete activity. Eight repeated `eventID` occurrences were detected; these must not be silently deduplicated. Some API actions occur in both benign and attack-labeled records.
+
+**Development output:** `4,216` source records → `1,742` actor/IP/time-bin cases; `64` cases contain ≥1 attack-labeled record; `4` cases combine benign and attack-labeled events. `cases.jsonl` has no explicit `should_sample`/`attack_name` labels. Separate `case_ground_truth.jsonl` and `event_ground_truth.jsonl` remain private.
+
+**Limitations:** Attack *records* are not independent attacks; development correlation may merge or split actual sequences. Future evaluation must audit unintended label leakage, identity stability, timestamp leakage, case contamination and the impact of class imbalance. Do not claim cloud-incident accuracy without held-out, case-level scoring.

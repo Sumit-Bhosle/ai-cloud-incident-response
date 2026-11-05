@@ -497,3 +497,20 @@ ground-truth annotation.
 - Evaluate Wazuh deployment compatibility and resources.
 - Generate additional authorized security telemetry.
 - Prepare sanitized datasets and reproducible demos.
+
+<!-- DEVLOG-2026-11-04-AI-CLOUD -->
+
+## Development entry — 2026-11-04 | Wazuh → AI/RAG + CloudTrail case pipeline
+
+**Scope:** Advanced the project from validated Wazuh evidence processing to a local Qwen2.5 1.5B investigation prototype, initial keyword-based RAG, and AWS CloudTrail development-case preparation.
+
+- **Wazuh ingestion:** Exported two genuine archived alerts for `PFL-001-RUN-002`; independently checked their SHA-256; normalized rules `5503` and `5301` into the shared event schema. Added `src/ingestion/normalize_wazuh_alerts.py`, optional schema fields, and seven loader tests. Existing suite increased from 35 to **42 passing tests**.
+- **Local LLM:** Installed Ollama, downloaded `qwen2.5:1.5b`, and ran manual then Python-driven inference. Source: `src/investigation/ai_investigator.py`. Model output is provisional and requires human review.
+- **RAG prototype:** Added `data/knowledge_base/security_references.json` and `src/investigation/rag_investigator.py` using transparent keyword overlap retrieval from curated MITRE/NIST notes. It is **not** semantic vector retrieval or a validated citation-support checker.
+- **Exploratory comparison:** Implemented `src/evaluation/compare_rag_conditions.py`; both same-prompt conditions classified an authorized lab preflight as suspicious. Controlled RAG returned `knowledge_ids: []` despite retrieving reference records. Findings do not establish comparative accuracy.
+- **CloudTrail:** Audited held-out test ZIP (24,087 records; 2,585 attack-labeled; 10 scenario labels; eight repeated source `eventID` occurrences). Preprocessed **4,216 development records into 1,742 heuristic cases** (64 attack-associated cases; 4 mixed cases). Cases and private label files are separated. The heuristic groups by actor, source IP, and a 30-minute bin, not by a verified incident identifier.
+- **Verification:** `python3 -m compileall -q src tests` passed; **42/42 existing tests** passed; development case builder and label-separation checkpoint passed. New AI/RAG/correlation modules still require dedicated tests and an independently runnable sanitized demo.
+
+**Remaining engineering risks:** Prompt overinterpretation, lack of claim-level citation validation, weak correlation heuristic, potential data leakage through indirectly identifying fields, insufficient model evaluation, CPU-only inference constraints, and demo reliance on private lab data. No autonomous incident response actions are implemented.
+
+**Next:** Dedicated tests and schema contracts; case-level CloudTrail AI triage; evidence-backed report verification; development/held-out evaluation discipline; professor-runnable demo and source-code walkthrough.
