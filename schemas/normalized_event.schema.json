@@ -97,6 +97,18 @@
     },
     "normalization_notes": {
       "type": "string"
+    },
+    "wazuh_rule_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "wazuh_rule_level": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "wazuh_rule_description": {
+      "type": "string",
+      "minLength": 1
     }
   }
 }
