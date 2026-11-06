@@ -220,3 +220,21 @@ First CloudTrail report: three review flags; manual review required.
 [Verification tests](tests/test_cloud_ai_report_verifier.py)
 
 This is targeted verification, not complete automated fact-checking.
+
+<!-- cloud-evaluation-framework -->
+## Cloud Investigation Evaluation
+
+The evaluation framework compares investigation reports against
+separately stored CloudTrail case-level ground truth.
+
+- Development cases: 1,742
+- Attack-associated cases: 64
+- Mixed-label cases: 4
+- Automated tests: 80 passing
+- First AI report: one false positive against dataset labels
+
+Only one AI report has been evaluated so far. No overall
+accuracy or multi-method performance claims are established.
+
+[Evaluation source](src/evaluation/evaluate_cloud_investigations.py) |
+[Evaluation tests](tests/test_cloud_investigation_evaluation.py)

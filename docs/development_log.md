@@ -545,3 +545,14 @@ Added 11 tests; full project suite passed 66/66.
 Checks include evidence integrity, citation membership,
 knowledge references, label isolation, truncated inputs,
 and selected unsupported claims.
+
+## November 6, 2026 — Investigation evaluation framework
+
+Implemented `evaluate_cloud_investigations.py` with 14 tests.
+Complete project suite: 80/80 passed.
+
+Added case-level label matching, coverage accounting,
+confusion matrices, citation metrics, review status,
+and inference-time tracking.
+
+Fixed mixed-case counting and unavailable paired comparisons.

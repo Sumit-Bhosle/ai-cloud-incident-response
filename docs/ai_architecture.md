@@ -93,3 +93,17 @@ checks evidence hashes, citation identifiers and selected
 factual claims without consulting attack ground truth.
 
 Full claim-level semantic verification remains future work.
+
+## Investigation evaluation framework
+
+CloudTrail cases + saved investigation reports feed the
+independent evaluation module.
+
+Ground-truth labels are joined only during evaluation,
+not supplied as AI investigation inputs.
+
+Metrics include report coverage, confusion counts,
+selective classification metrics, citation membership,
+verification flags and inference time.
+
+Cross-method comparison requires reports for common case IDs.
