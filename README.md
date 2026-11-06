@@ -184,3 +184,25 @@ The [original SOC visual walkthrough](#visual-soc-laboratory-walkthrough) and si
 The current correlation algorithm is experimental. Ground-truth labels are kept separate from AI input.
 
 [AI Architecture](docs/ai_architecture.md) · [Experiment Log](docs/experiment_log.md) · [Development Log](docs/development_log.md)
+
+<!-- phase-99-cloud-ai -->
+## Phase 99 — CloudTrail AI Investigation
+
+The first real CloudTrail development case was analyzed using
+local Qwen2.5 1.5B and retrieved AWS security guidance.
+
+**Pipeline:** CloudTrail case → evidence selection →
+knowledge retrieval → Qwen → structured SOC report.
+
+- 3 CloudTrail events analyzed.
+- 32.03-second CPU inference.
+- Report saved privately.
+- 5 new tests passed.
+- Citation IDs and report format validated.
+
+**Research finding:** The model classified routine-looking
+SSM activity as suspicious without sufficient supporting context.
+Factual correctness remains unverified.
+
+[Cloud AI source](src/investigation/cloud_case_investigator.py) |
+[Cloud knowledge](data/knowledge_base/cloudtrail_guidance.json)

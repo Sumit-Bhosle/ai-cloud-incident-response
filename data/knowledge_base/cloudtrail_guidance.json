@@ -1,0 +1,30 @@
+[
+  {
+    "id": "AWS-CLOUDTRAIL",
+    "title": "AWS CloudTrail event record fields",
+    "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html",
+    "services": ["all"],
+    "summary": "A CloudTrail event records the requested API action, event time, identity and source information. Some fields are optional. An API name alone does not show malicious intent; missing errorCode alone is not enough to prove an operation's impact. Examine context and related evidence."
+  },
+  {
+    "id": "AWS-S3-EVENTS",
+    "title": "AWS: Identifying Amazon S3 requests using CloudTrail",
+    "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/cloudtrail-request-identification.html",
+    "services": ["s3.amazonaws.com"],
+    "summary": "CloudTrail S3 data events may include GetObject, PutObject and DeleteObject requests. These operations also occur during legitimate workloads. Examine identity, resources, error status, scope and temporal patterns before judging a case."
+  },
+  {
+    "id": "MITRE-T1530",
+    "title": "MITRE ATT&CK T1530: Data from Cloud Storage",
+    "url": "https://attack.mitre.org/techniques/T1530/",
+    "services": ["s3.amazonaws.com"],
+    "summary": "Adversaries may collect data through cloud-storage APIs. The technique is context for investigation, not proof that observed GetObject calls represent theft, exfiltration or an attack."
+  },
+  {
+    "id": "AWS-IDENTITY",
+    "title": "AWS CloudTrail userIdentity element",
+    "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html",
+    "services": ["iam.amazonaws.com", "sts.amazonaws.com"],
+    "summary": "CloudTrail identity fields help identify the principal or session associated with an AWS API call. Role assumption and IAM API calls require context before attributing malicious intent or claiming privilege escalation."
+  }
+]

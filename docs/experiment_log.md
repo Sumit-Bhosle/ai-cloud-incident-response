@@ -365,3 +365,23 @@ Preserve the observed HLD-008 failure in the Experiment 005 record. Any subseque
 **Development data:** 4,216 events, 1,742 cases, 64 attack-associated cases, and 4 mixed-label cases.
 
 **Limitation:** These tests verify software behavior, not AI detection accuracy or real-world incident correlation quality.
+
+## November 6, 2026 — First Cloud AI investigation
+
+Case: CLOUD-DEV-CASE-3a888e0b78f4b721
+
+Input: 3 AWS Systems Manager events from the development dataset.
+Knowledge: AWS-CLOUDTRAIL.
+Model: qwen2.5:1.5b, running locally through Ollama.
+Inference: 32.03 seconds.
+
+Output classification: suspicious.
+
+**Observed limitations:** Repeated management operations
+were treated as suspicious without clear attack evidence.
+The report also made questionable statements about source
+IP attribution and operation success.
+
+Report formatting and citation identifiers passed validation.
+This run does not establish correctness or detection accuracy.
+No ground-truth labels were supplied to the AI.

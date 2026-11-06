@@ -524,3 +524,15 @@ Verified UTC conversion, required-field validation, duplicate source ID preserva
 **Result:** 50/50 automated tests passed.
 
 Next: stronger AI investigation, factual verification, and independent evaluation.
+
+## November 6, 2026 — Phase 99
+
+Implemented CloudTrail case-level AI investigation using
+local Ollama/Qwen and AWS security knowledge retrieval.
+
+Added cloud_case_investigator.py, cloudtrail_guidance.json
+and five automated tests.
+
+First real development case: 3 events, 32.03 seconds.
+Structured report saved privately. Evidence and reference
+IDs validated; factual verification remains future work.

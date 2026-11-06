@@ -64,3 +64,19 @@ python3 -m src.investigation.rag_investigator
 ```
 
 **Next architecture gates:** robust correlation; provenance-aware citation validation; guarded abstention; controlled cloud case evaluation; sanitized reproducible demo; documented exact dependency/model versions and latency measurements.
+
+## Phase 99 — CloudTrail integration
+
+Source: `src/investigation/cloud_case_investigator.py`
+
+1. Read correlated development cases.
+2. Select a small case without using ground truth.
+3. Choose service-relevant AWS/MITRE references.
+4. Cap detailed events and flag truncated evidence.
+5. Send evidence and references to local Qwen.
+6. Validate JSON schema and known citation IDs.
+7. Save a protected private report.
+
+Current limitations: keyword/service-based retrieval,
+heuristic case grouping, no claim-level factual verifier,
+and no independently established AI classification accuracy.
