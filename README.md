@@ -1,5 +1,7 @@
 # Evaluating AI-Assisted Cloud Security Incident Response
 
+**[Project Inventory — Tech Stack, Datasets, Knowledge Base & Source Files](docs/project_inventory.md)**
+
 **Subtitle:** Accuracy, Reliability, Explainability, and Analyst Efficiency
 
 ## Overview
