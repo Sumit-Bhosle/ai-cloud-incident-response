@@ -80,3 +80,16 @@ Source: `src/investigation/cloud_case_investigator.py`
 Current limitations: keyword/service-based retrieval,
 heuristic case grouping, no claim-level factual verifier,
 and no independently established AI classification accuracy.
+
+## Phase 100 — Independent Evidence Verification
+
+CloudTrail case → AI/RAG report → deterministic verifier
+→ verification artifact → analyst review.
+
+Implementation: `src/evaluation/verify_cloud_ai_report.py`
+
+The original AI response remains unchanged. The verifier
+checks evidence hashes, citation identifiers and selected
+factual claims without consulting attack ground truth.
+
+Full claim-level semantic verification remains future work.

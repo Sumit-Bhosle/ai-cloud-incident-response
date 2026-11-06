@@ -206,3 +206,17 @@ Factual correctness remains unverified.
 
 [Cloud AI source](src/investigation/cloud_case_investigator.py) |
 [Cloud knowledge](data/knowledge_base/cloudtrail_guidance.json)
+
+<!-- phase-100-verification -->
+### Phase 100 — AI Evidence Verification
+
+**66/66 tests passing.** An independent verifier now checks
+AI report integrity, evidence citations, retrieved knowledge,
+and selected factual overclaims.
+
+First CloudTrail report: three review flags; manual review required.
+
+[Verifier source](src/evaluation/verify_cloud_ai_report.py) |
+[Verification tests](tests/test_cloud_ai_report_verifier.py)
+
+This is targeted verification, not complete automated fact-checking.
