@@ -162,3 +162,25 @@ The [original SOC visual walkthrough](#visual-soc-laboratory-walkthrough) and si
 **Research navigation:** [Development log](docs/development_log.md) · [Experiment log](docs/experiment_log.md) · [Dataset card](docs/dataset_card.md) · [Research decisions](docs/research_decisions.md) · [Presentation/demo notes](docs/presentation_demo_notes.md) · [November 4 checkpoint](docs/checkpoints/2026-11-04_research_checkpoint.md)
 
 <!-- MILESTONE-2026-11-04-AI-CLOUD-END -->
+
+<!-- phase-98-reliability -->
+## CloudTrail Reliability — November 5, 2026
+
+**50/50 tests passing | 4,216 CloudTrail records | 1,742 investigation cases**
+
+| Research metric | Verified result |
+|---|---:|
+| Attack-associated cases | 64 |
+| Mixed-label cases | 4 |
+| New reliability tests | 8 |
+| Total automated tests | 50 |
+
+### Cloud AI pipeline
+
+![SOC Evidence Pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
+
+**CloudTrail → Normalization → Case Correlation → AI/RAG Investigation → Evaluation**
+
+The current correlation algorithm is experimental. Ground-truth labels are kept separate from AI input.
+
+[AI Architecture](docs/ai_architecture.md) · [Experiment Log](docs/experiment_log.md) · [Development Log](docs/development_log.md)

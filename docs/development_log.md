@@ -514,3 +514,13 @@ ground-truth annotation.
 **Remaining engineering risks:** Prompt overinterpretation, lack of claim-level citation validation, weak correlation heuristic, potential data leakage through indirectly identifying fields, insufficient model evaluation, CPU-only inference constraints, and demo reliance on private lab data. No autonomous incident response actions are implemented.
 
 **Next:** Dedicated tests and schema contracts; case-level CloudTrail AI triage; evidence-backed report verification; development/held-out evaluation discipline; professor-runnable demo and source-code walkthrough.
+
+## November 5, 2026 — Phase 98
+
+Implemented eight automated tests for CloudTrail case-building reliability.
+
+Verified UTC conversion, required-field validation, duplicate source ID preservation, case correlation, label separation, idempotency, overwrite protection, and Git-ignore enforcement.
+
+**Result:** 50/50 automated tests passed.
+
+Next: stronger AI investigation, factual verification, and independent evaluation.

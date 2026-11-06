@@ -355,3 +355,13 @@ Preserve the observed HLD-008 failure in the Experiment 005 record. Any subseque
 - A passing JSON schema / known citation-ID check doesn't prove claims are true, and a retrieved MITRE technique isn't a confirmed incident.
 - No precision, recall, F1, latency benefit, analyst-efficiency improvement, or model reliability figure has yet been established for these cloud cases.
 - Exact tool outputs and raw data remain in Git-ignored local research evidence; publish sanitized results only after review.
+
+## November 5, 2026 — CloudTrail Reliability Evaluation
+
+**Method:** Eight controlled tests using temporary CloudTrail fixtures.
+
+**Results:** 8/8 new tests passed; 50/50 total tests passed.
+
+**Development data:** 4,216 events, 1,742 cases, 64 attack-associated cases, and 4 mixed-label cases.
+
+**Limitation:** These tests verify software behavior, not AI detection accuracy or real-world incident correlation quality.

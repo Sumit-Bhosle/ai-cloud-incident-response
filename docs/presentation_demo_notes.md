@@ -282,3 +282,17 @@ python3 -m unittest discover -s tests
 **Evidence clips/screenshots:** Reuse the six genuine images in `docs/assets/screenshots/` and the original PNG/SVG in `docs/assets/diagrams/`. Show actual on-screen source and output; never imply the currently planned cloud-case-to-LLM connection or claim-level verifier is already implemented.
 
 **Professor-run deliverable remaining:** Sanitized portable input, supported Python version/dependencies, Ollama model availability/fallback clarity, concise start script, executable test suite, user guide, video, PPT and final report.
+
+## November 5, 2026 — Professor Code Demonstration
+
+Show `src/ingestion/build_cloudtrail_cases.py` and explain:
+
+- Dataset ingestion and normalization
+- Actor/IP/time-window correlation
+- Separate ground-truth storage
+- Protected evidence outputs
+- Automated tests in `tests/test_cloudtrail_case_builder.py`
+
+Run: `python3 -m unittest discover -s tests`
+
+Verified result: 50 tests passed. The portable standalone AI demo remains pending.
