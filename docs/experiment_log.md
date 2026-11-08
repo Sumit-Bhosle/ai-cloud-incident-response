@@ -414,3 +414,58 @@ Paired comparison is unavailable.
 
 This validates the evaluator, not population-level AI accuracy.
 The original mixed-case counting defect was corrected.
+
+
+## November 8, 2026 — Three-method live JSON failures
+
+The first six-case comparison ran baseline successfully (6/6) but yielded 11 JSON parsing failures in the 12 local Qwen runs (LLM-only 1/6, RAG 0/6). The first run remains in private `comparison_01/`. Original automated tests passed (100/100) but failed to expose live LLM generation fragility. We introduced concise JSON output, higher generation budgets, one bounded retry, failure diagnostics and four additional tests. All revised model results will be written separately under `comparison_02/`. The 400-token limit is a plausible contributor but was not conclusively confirmed in the first run. Full analysis: `docs/llm_output_failure_analysis.md`.
+
+
+## November 8, 2026 — LLM-only citation hallucination in second comparison
+
+Experiment comparison_02 kept the same six development cases: baseline 6/6 successful, Qwen+RAG 6/6 successful, and LLM-only 0/6 successful. Five LLM-only predictions were rejected for invented knowledge references in a no-RAG condition; one failed with Ollama HTTP 500. This is not evidence that RAG improves classification accuracy; it is evidence that response formatting and source attribution affect reliability. A bounded JSON schema tied to retrieved IDs, explicit no-knowledge instructions and one transient HTTP retry were introduced. Five regression tests added. Previous experiments are preserved; subsequent outputs go under comparison_03. See docs/llm_output_failure_analysis.md.
+
+## Verified three-method experiment — comparison_03
+
+Dataset: AWS CloudTrail development split.
+Sample: 6 selected cases, 3 attack-associated and 3 benign.
+Methods: Traditional baseline, Qwen LLM-only, Qwen with RAG.
+Model: Qwen2.5 1.5B through local Ollama.
+
+| Metric | Baseline | LLM-only | RAG + LLM |
+|---|---:|---:|---:|
+| Successful reports | 6/6 | 6/6 | 6/6 |
+| Precision | 1.0000 | 0.5000 | 0.5000 |
+| Recall | 0.3333 | 1.0000 | 0.3333 |
+| F1 | 0.5000 | 0.6667 | 0.4000 |
+| False positives | 0 | 3 | 1 |
+| False negatives | 2 | 0 | 2 |
+| Mean reported inference time (s) | 0.0 | 19.31 | 12.53 |
+| Reports with evidence citations | 1 | 6 | 2 |
+| Reports with knowledge citations | 0 | 0 | 0 |
+
+### Engineering failures and corrections
+
+- Comparison 01: 11 of 12 AI runs failed with malformed JSON.
+- Comparison 02: RAG succeeded 6/6, but LLM-only failed 6/6.
+- Identified invented knowledge citations in LLM-only mode and
+  one Ollama HTTP 500 error.
+- Corrected structured-output handling, citation constraints,
+  and transient failure handling.
+- Comparison 03: all 18 investigation reports generated successfully.
+- Complete automated suite: 109 tests passed.
+
+### Research limitations
+
+This is a small, balanced development-only experiment, not
+a representative estimate of production detection accuracy.
+
+Some large cases were truncated to ten detailed events.
+RAG retrieved references for all cases but produced zero
+knowledge citations and evidence citations in only two reports.
+
+The existing deterministic verification checks do not validate
+all free-text claims. Results do not establish RAG superiority.
+
+Ground-truth labels were used for scoring, not investigator input.
+All three experiment directories remain preserved privately.
