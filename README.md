@@ -270,3 +270,7 @@ accuracy or multi-method performance claims are established.
 
 [Evaluation source](src/evaluation/evaluate_cloud_investigations.py) |
 [Evaluation tests](tests/test_cloud_investigation_evaluation.py)
+
+## Wazuh-to-AI: verified end-to-end research milestone
+
+The tested Wazuh alert ingestion → baseline / local LLM / RAG → evidence-based human-review gate → stakeholder report workflow is documented in [the runbook](docs/wazuh_ai_completion_runbook.md). For actual sample sizes, error rates, model scores and limitations, see [the observed results](docs/wazuh_ai_final_results.md). The cloud events were **synthetically generated**; model assessments are not independently verified compromises.
