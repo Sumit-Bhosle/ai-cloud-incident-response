@@ -1,3 +1,9 @@
+<!-- FINAL-RESEARCH-2026-11-09-HISTORICAL -->
+
+> **Historical snapshot notice (updated 9 Nov 2026):** This page preserves an earlier experiment state; for the completed 100-case Wazuh-sourced results, see [final measurements](wazuh_ai_final_results.md) and [research journey](RESEARCH_JOURNEY_AND_LIMITATIONS.md). The earlier 397/400 current-log discrepancy was resolved by reading Wazuh archives (400/400 verified IDs, 100 complete cases, zero mismatches).
+
+---
+
 # Project Inventory and Repository Guide
 
 > **Research project:** Evaluating AI-Assisted Cloud Security Incident Response  

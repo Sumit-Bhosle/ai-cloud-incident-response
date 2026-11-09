@@ -1,3 +1,9 @@
+<!-- FINAL-RESEARCH-2026-11-09-HISTORICAL -->
+
+> **Historical snapshot notice (updated 9 Nov 2026):** This page preserves an earlier experiment state; for the completed 100-case Wazuh-sourced results, see [final measurements](wazuh_ai_final_results.md) and [research journey](RESEARCH_JOURNEY_AND_LIMITATIONS.md). The earlier 397/400 current-log discrepancy was resolved by reading Wazuh archives (400/400 verified IDs, 100 complete cases, zero mismatches).
+
+---
+
 # One-day research completion gate — Wazuh → AI → executive review
 
 **Project:** Evaluating AI-Assisted Cloud Security Incident Response (COMP 5112).  
@@ -6,13 +12,13 @@
 
 ## Completion criteria (all P0 mandatory)
 
-- [ ] **P0. Wazuh source verified:** import the manager's real JSON alert records. For every used event, verify its source event ID, case ID, actor, IP, action, resource, service, error code, rule ID and monitored log source. Report missing or conflicting events. No inferred incidents.
-- [ ] **P0. End-to-end:** run one named critical case **from Wazuh alerts**, obtaining baseline, raw LLM and raw RAG assessments plus a guarded triage decision. Each report must expose matched Wazuh alert IDs and simulated event IDs.
-- [ ] **P0. Fact safety:** do not publish unverifiable claims about confirmed data loss, successful AWS operations, S3 deletion when only CloudTrail deletion occurred, or credential attacks without evidence. Human approval is always required.
-- [ ] **P0. Model errors:** show abstentions/errors, claim checks, contradictory severity and missing citations. On failure the case stays in analyst review; it never defaults silently to benign.
-- [ ] **P0. Executive output:** reviewed readable HTML **and** Markdown with what Wazuh recorded, possible impact, exact matching IDs, concrete actions for the client and risk qualification.
-- [ ] **P1. Reproducible evaluation:** run across all eligible complete Wazuh cases (up to 100), with cached checkpoints, same cases for all methods, true/false classifications and failures scored against truth **after** models run.
-- [ ] **P1. Documentation:** publish only the observed data and limitations, do not merge six-case earlier CloudTrail development outcomes with the new 100-case synthetic experiment.
+- [x] **P0. Wazuh source verified:** import the manager's real JSON alert records. For every used event, verify its source event ID, case ID, actor, IP, action, resource, service, error code, rule ID and monitored log source. Report missing or conflicting events. No inferred incidents.
+- [x] **P0. End-to-end:** run one named critical case **from Wazuh alerts**, obtaining baseline, raw LLM and raw RAG assessments plus a guarded triage decision. Each report must expose matched Wazuh alert IDs and simulated event IDs.
+- [x] **P0. Fact safety:** do not publish unverifiable claims about confirmed data loss, successful AWS operations, S3 deletion when only CloudTrail deletion occurred, or credential attacks without evidence. Human approval is always required.
+- [x] **P0. Model errors:** show abstentions/errors, claim checks, contradictory severity and missing citations. On failure the case stays in analyst review; it never defaults silently to benign.
+- [x] **P0. Executive output:** reviewed readable HTML **and** Markdown with what Wazuh recorded, possible impact, exact matching IDs, concrete actions for the client and risk qualification.
+- [x] **P1. Reproducible evaluation:** run across all eligible complete Wazuh cases (up to 100), with cached checkpoints, same cases for all methods, true/false classifications and failures scored against truth **after** models run.
+- [x] **P1. Documentation:** publish only the observed data and limitations, do not merge six-case earlier CloudTrail development outcomes with the new 100-case synthetic experiment.
 
 **Important scope boundary:** An automated **polling bridge** reads Wazuh's alert file and investigates a complete case when it is available. This is not a production deployment, a Wazuh dashboard action/webhook, an AWS API integration, a real attack, or autonomous incident remediation. Our generated labels are a designed reference, not real attack ground truth.
 

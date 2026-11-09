@@ -568,3 +568,15 @@ Added/ran `src/demo/soc_demo.py` and optional `deploy/wazuh` integration. Confir
 **Architecture status:** Real Wazuh receives the test logs. The investigator reads its own generated case JSONL rather than fetching Wazuh alerts. Human review and claim-level grounding are still needed. The older public CloudTrail development study remains separate.
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Final integration and repository publication — 9 Nov 2026
+
+- Recovered the full 100-case academic SOC simulation after Wazuh rule and manager recovery testing. The custom action rules (`110101`, `110102`) now validate, and the dashboard displayed 400 clearly tagged synthetic alerts.
+- Implemented `src/demo/wazuh_pipeline.py` and `src/demo/grounded_model.py` for direct Wazuh alert-reading, same-case source-field verification, three-method investigations, analyst review, and private cached results. Added HTML reporting in `src/demo/executive_html.py`.
+- A direct `watch --once --case SOCSIM-009` run read three verified Wazuh records and completed baseline / LLM-only / RAG processing. Output: baseline critical, LLM-only suspicious, RAG suspicious, `priority_review=True` (one observed run; model results may vary).
+- Initial current-file audit found 397/400 IDs and 99 complete cases; a later current-plus-archive audit found 797 candidate records, 397 duplicates, **400 unique matching IDs**, all 100 cases and no mismatches.
+- Completed the final paired 100-case evaluation and generated review-required stakeholder HTML/Markdown outputs. Commit `0661ce8` published the pipeline, tests and aggregate results on `main`, with a clean worktree after push.
+- Verified `python3 -m unittest discover -s tests -q` completed **140 tests: OK**. The HTTPError ResourceWarning is retained as a minor test-cleanliness issue, not a failed test.
+- Consolidated README, full reproduction guide, final research narrative and repository audit without erasing historical snapshots. Repository cleanup is intentionally evidence-preserving.

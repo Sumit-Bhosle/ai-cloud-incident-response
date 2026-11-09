@@ -494,3 +494,19 @@ All three experiment directories remain preserved privately.
 **Research finding (scoped):** LLM/RAG did not outperform the simple baseline on this one six-case three-class simulation. Generated prose frequently exceeded its evidence. No independent analyst-time efficiency, generalization, production safety or automatic Wazuh-to-LLM trigger was demonstrated.
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Final Wazuh-sourced 100-case comparison — 9 Nov 2026
+
+**Dataset:** ten deliberately designed templates repeated ten times; 100 simulator-labeled cases (40 benign / 30 suspicious / 30 critical), 400 synthetic CloudTrail-like JSON events. **No AWS attacks or remediation** executed.
+
+**Evidence provenance:** actual Wazuh Manager `alerts.json` plus archived JSON/JSON.GZ records. Full read: 797 candidate records, 397 duplicates, **400/400 distinct source IDs matched**, 0 source-field mismatches, 100 complete cases. Three rule groups: `110100=160`, `110101=140`, `110102=100`. Original 397/400 result came from the current alert file alone and is **resolved**, not discarded.
+
+**Paired classification:** all three investigators processed the same complete Wazuh-linked cases. Baseline **100/100 (100%)**, LLM-only **53/100 (53%)**, RAG-assisted **30/100 (30%)**. Do not confuse this *three-class severity* experiment with the earlier six-case *binary CloudTrail* pilot or six-case SOC functional demo. Predictions and truth labels were separated until scoring. The matched baseline is expected to benefit from the simulator's pattern design.
+
+**Quality and interpretation:** the pretrained `qwen2.5:1.5b` model sometimes under-rated high-risk IAM or audit-log sequences and produced unsupported claims (including wrong service/resource attribution). The final executive reporter uses verified observed actions, exact event IDs and conservative deterministic summaries; its generated outputs are **review required**, not fact-certified client deliverables. RAG did not improve accuracy. Analyst review demand was calculated as a proxy; **human time saved was not measured**.
+
+**Integration faults preserved:** initial Wazuh static `action` rule mismatch caused manager restart failure; rollback and `<action type="pcre2">` corrected it. Earlier LLM JSON-format/HTTP errors required validation and retry. No model fine-tuning or actual cloud response occurred.
+
+**Reproduction references:** [from-scratch setup](SETUP_FROM_SCRATCH.md), [full experiment journey](RESEARCH_JOURNEY_AND_LIMITATIONS.md), [published aggregate metrics](wazuh_ai_final_results.md). Offline suite: **140 passed**.

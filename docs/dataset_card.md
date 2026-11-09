@@ -87,3 +87,21 @@ This is **not** a new split of the Ariel Cyber CloudTrail dataset. `python3 -m s
 See [complete SOC demo methodology and charts](soc_results_2026-11-09.md).
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Final Wazuh-linked synthetic SOC dataset (separate from Ariel Cyber CloudTrail) — 9 Nov 2026
+
+| Property | Verified design / observation |
+|---|---|
+| Source and scope | Local deterministic generator in `src/demo/soc_demo.py`; no AWS requests made |
+| Case and event counts | 100 designed cases and 400 simulated API records |
+| Label distribution | 40 benign, 30 suspicious, 30 designated critical |
+| Scenario diversity | Ten hand-designed templates each repeated ten times; **not independent real-world cases** |
+| Event-to-alert integrity | 400 matching distinct Wazuh identifiers, zero mismatches after scanning current and archived manager alerts |
+| Alert severity | Rule `110100` level 3: 160; `110101` level 8: 140; `110102` level 12: 100 |
+| Truth leakage defense | `ground_truth_PRIVATE.jsonl` isolated and accessed only by evaluation code after saved model predictions |
+| Storage and confidentiality | `data/lab_evidence/soc_demo/` is Git-ignored; don't commit Wazuh exports, generated labels or raw LLM reports |
+| Known biases | Templates repeated; baseline intentionally aligned to patterns; no real attacker behaviors, unauthorized outcomes or human time measurements |
+
+**Do not combine** this final 100-case three-class experiment with the earlier 6-case binary CloudTrail pilot; the public Ariel Cyber datasets are a separate provenance track. See [the full methodology](RESEARCH_JOURNEY_AND_LIMITATIONS.md).

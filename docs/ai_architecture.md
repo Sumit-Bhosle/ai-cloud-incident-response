@@ -119,3 +119,11 @@ The [actual execution diagram, Wazuh screenshots, and evaluation results](soc_re
 The pilot showed 400 dashboard hits, 397 local alert-ID matches and a six-case comparison. **Retrieval is not source-grounded fact verification** and the generated report contains identified hallucinations. No fine-tuning, autonomous incident response, or analyst-efficiency improvement is established.
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Completed 2026-11-09 implementation: verified Wazuh polling bridge
+
+`src/demo/wazuh_pipeline.py` reads the actual Wazuh manager alert JSON or its JSON/GZ archive directory, filters simulation-tagged records, and verifies case ID, event ID, actor, IP, action, service, resource, error code, Wazuh rule and log source against generated evidence. Incomplete cases are not scored. A `watch` mode polls for new complete cases. The identical verified case goes to rule baseline, Ollama/Qwen model and reference-assisted model; truth labels and Wazuh severity are excluded from prompts. `grounded_model.py` enforces constrained output formats and citations; `executive_html.py` renders an evidence-based report with human review gating. The review gate does not alter the recorded raw model classification for evaluation.
+
+Full setup: [SETUP_FROM_SCRATCH.md](SETUP_FROM_SCRATCH.md). Final results: [wazuh_ai_final_results.md](wazuh_ai_final_results.md).

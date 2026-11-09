@@ -1,276 +1,182 @@
 # Evaluating AI-Assisted Cloud Security Incident Response
 
-<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+**Lakehead University · COMP 5112 Research Methodology · Academic research prototype (November 2026)**
 
-## Latest verified milestone · SOC simulation and AI investigation (9 Nov 2026)
+[![Python](https://img.shields.io/badge/Python-3-blue)](https://www.python.org/) [![Wazuh](https://img.shields.io/badge/SIEM-Wazuh%204.14.9-1176b6)](https://wazuh.com/) [![Ollama](https://img.shields.io/badge/Local%20LLM-Qwen2.5%201.5B-555)](https://ollama.com/) [![Study](https://img.shields.io/badge/Study-controlled%20simulation-555)](#research-design-and-data)
 
-> **Research prototype / academic simulation:** 100 generated test cases and 400 simulated cloud API records were ingested by a real Wazuh deployment. **No real cloud attacks were executed.** The LLM is pretrained Qwen2.5 1.5B via Ollama, not project-fine-tuned.
+> **At a glance:** An evidence-verifiable, human-supervised research workflow links actual **Wazuh SIEM alert records** to a rule-based investigator, an unmodified local LLM, and a reference-assisted LLM. The project generates a business-readable executive report while keeping unsupported model assertions separate from verified observations. **No actual AWS attack or autonomous remediation is performed.**
 
-![Wazuh Threat Hunting screenshot: 400 filtered synthetic alert hits](docs/assets/soc-2026-11-09/wazuh-filtered-400-events.png)
-
-*Observed visual evidence: Wazuh Threat Hunting → Events, `rule.groups: soc_demo`, **400 hits** with detection levels **3, 8 and 12** (rule IDs `110100`–`110102`). These are generated log entries, **not 400 actual security incidents**.*
-
-| Controlled research measurement | Verified observation |
-|---|---:|
-| Prepared simulated cases | **100**: 40 benign, 30 suspicious, 30 designated critical |
-| Simulated log entries / Wazuh filtered UI hits | **400 / 400** |
-| Local `alerts.json` event-ID cross-check | **397 / 400 (99.25%)** — 3-record discrepancy unresolved |
-| Evaluated cases (identical evidence in all methods) | **6** |
-| Correct predictions out of 6 attempts | **Rule baseline 6** · **LLM-only 2** · **RAG 2** |
-| Unsuccessful/invalid model answers | **LLM-only 2 / 6** · **RAG 1 / 6** |
-
-![Six-case outcome comparison: correct, incorrect and failed outputs](docs/assets/soc-2026-11-09/02-six-case-outcomes.png)
-
-**Important research finding:** On this deliberately engineered six-case **synthetic** sample, adding a small local LLM or retrieval did **not** improve classification. Several AI explanations contain unsupported claims, including confusing AWS CloudTrail trail deletion with S3 bucket deletion. The generated executive narrative is **not client-approved**. The software runs a human-supervised research workflow, **not autonomous incident remediation**.
-
-**Explore the evidence:** [Full SOC results, charts, case matrix, corrected executive brief and deployment log](docs/soc_results_2026-11-09.md) · [SOC demo instructions](docs/soc_demo.md) · [Experiment log](docs/experiment_log.md) · [Separate CloudTrail development comparison](docs/three_method_comparison.md)
-
-> **Boundary:** The demo Python investigator and Wazuh monitor the **same generated evidence with matching IDs**. Python does not yet automatically consume Wazuh alerts. Public CloudTrail pilot findings and three-class synthetic SOC metrics are separate experiments; do not mix their scores.
-
-<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
-
-
-**[Project Inventory — Tech Stack, Datasets, Knowledge Base & Source Files](docs/project_inventory.md)**
-
-**Subtitle:** Accuracy, Reliability, Explainability, and Analyst Efficiency
-
-## Overview
-
-This research project investigates how AI assistance affects cloud security
-incident investigation compared with a baseline investigation workflow.
-
-The project focuses on evidence-based investigation, transparent AI outputs,
-human verification, and reproducible experiments.
-
-## Research Objectives
-
-- Evaluate investigation accuracy.
-- Measure reliability and unsupported claims.
-- Assess evidence grounding and explainability.
-- Compare investigation time between baseline and AI-assisted workflows.
-- Keep the human analyst responsible for final decisions.
-
-## Proposed Architecture
-
-1. Generate clearly labelled synthetic cloud audit events.
-2. Collect security telemetry using Wazuh where compatible.
-3. Process events and prepare evidence with Python.
-4. Investigate incidents using a baseline workflow and a local AI-assisted workflow.
-5. Compare results against independently defined ground truth.
-6. Report findings using reproducible evaluation scripts and visualizations.
-
-## Technology Direction
-
-- Ubuntu Linux
-- Python
-- Git and GitHub
-- Wazuh, subject to installation compatibility
-- Local AI inference, subject to available hardware resources
-- Grafana, as an optional visualization layer
-
-The project prioritizes free, local tools and avoids requiring paid cloud services.
-
-## Repository Structure
-
-```text
-data/
-  raw/
-  processed/
-  ground_truth/
-src/
-  ingestion/
-  investigation/
-  evaluation/
-experiments/
-results/
-docs/
-```
-
-## Dataset Notice
-
-Initial datasets will contain synthetic events for research and testing.
-They must not be represented as real cloud-provider logs.
-
-## Research Integrity and Safety
-
-- Preserve event evidence and record the source of each finding.
-- Distinguish observed facts from hypotheses.
-- Do not treat AI-generated conclusions as authoritative.
-- Do not perform destructive remediation automatically.
-- Never commit credentials, tokens, or sensitive real-world logs.
-
-## Project Status
-
-Initial repository and research dataset preparation.
-
-The architecture and methodology may evolve as the literature review,
-compatibility checks, and pilot experiments are completed.
-
-## Visual SOC laboratory walkthrough
-
-![Observed monitoring pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
-
-### Real monitoring demonstration (authorized local test)
-
-![Ubuntu authentication experiment](docs/assets/screenshots/03-ubuntu-controlled-authentication.png)
-
-![Wazuh detection results](docs/assets/screenshots/04-wazuh-raw-alert-query.png)
-
-| Wazuh rule 5503: failed PAM login | Wazuh rule 5301: failed user switch |
-|---|---|
-| ![5503](docs/assets/screenshots/05-threat-hunting-rule-5503.png) | ![5301](docs/assets/screenshots/06-threat-hunting-rule-5301.png) |
-
-The observed local Ubuntu experiment generated two system-journal authentication entries which Wazuh 4.14.9 collected and matched to level-5 rules 5503 and 5301. Both alerts appeared in Threat Hunting. **This is an authorized local test, not a real adversary attack or completed LLM evaluation.**
-
-[View all six original screenshots and provenance notes](docs/assets/README.md).
-
-<!-- MILESTONE-2026-11-04-AI-CLOUD-START -->
+**Start here:** [Reproduce from a fresh VMware Ubuntu VM](docs/SETUP_FROM_SCRATCH.md) · [Research journey & limitations](docs/RESEARCH_JOURNEY_AND_LIMITATIONS.md) · [Final 100-case results](docs/wazuh_ai_final_results.md) · [Demo runbook](docs/wazuh_ai_completion_runbook.md)
 
 ---
 
-## 🧠 AI-assisted cloud investigation | November 2026 milestone
+## 1. Research problem
 
-![Research prototype](https://img.shields.io/badge/AI-RAG%20prototype-2477B4)
-![Tests at last run](https://img.shields.io/badge/Regression%20tests-42%20passed-188A61)
-![CloudTrail](https://img.shields.io/badge/CloudTrail-24%2C087%20test%20events-7057B2)
-![Status](https://img.shields.io/badge/Research-preliminary-E6A23C)
+Cloud-security logs show API calls and identities, but individual alerts do not explain intent, verified impact, or business significance. Analysts must correlate evidence, assess severity, and communicate actionable findings. A language model might help with interpretation—but it can also misclassify incidents or invent unsupported explanations.
 
-> **Research objective:** Evaluate whether AI assistance improves the accuracy, reliability, explainability, and analyst efficiency of cloud-security incident investigations. This is a research prototype, **not** a production-grade SOC or an autonomous remediation system.
+**Research question:** *How do conventional rules, a local LLM, and retrieval-augmented generation compare for controlled cloud-security incident investigation, and can evidence checks make AI-generated reporting safer?*
 
-### Architecture: what runs today and what is still being built
+**What this project tests:** classification accuracy, output reliability, citation/claim quality, processing time, and analyst-review demand as a **proxy**. It does **not** claim real human time savings or real-world threat-detection accuracy.
+
+## 2. System architecture
 
 ```mermaid
 flowchart TD
-  A[Wazuh alerts / AWS CloudTrail evidence] --> B[Read + normalize + preserve evidence IDs]
-  B --> C[Heuristic correlation into investigation cases]
-  C --> D[Event context supplied to local Ollama LLM]
-  K[Curated MITRE / NIST reference notes] --> R[Keyword-based knowledge retrieval]
-  R --> D
-  D --> E[Structured JSON investigation report]
-  E --> F[Schema + citation-ID validation]
-  F --> G[Human analyst review]
-  T[(Separate private ground truth)] --> H[Research evaluation]
-  G --> H
-  F -.-> V[Planned: claim-level grounding verification]
-  style D fill:#DCE9FA,stroke:#3576BA,color:#112E4C
-  style H fill:#E7F4EC,stroke:#33845C,color:#174B32
-  style V fill:#FFF2D9,stroke:#C38422,color:#5C421A
+    A[100 labeled synthetic scenarios\n400 CloudTrail-like JSON events] -->|JSON log ingestion| B[Real Wazuh Manager\ncustom rules 110100–110102]
+    B --> C[Wazuh Indexer and Dashboard]
+    B -->|Read actual JSON alert records| D[Polling investigation bridge]
+    A -->|Independent source copy for integrity checks| D
+    D --> E{Complete event IDs and fields?}
+    E -->|No| F[Skip or analyst review\nnever invent evidence]
+    E -->|Yes| G[Same-case evidence]
+    G --> H[Rule-based baseline]
+    G --> I[Local Qwen2.5 1.5B]
+    G --> J[Qwen + curated MITRE/NIST/AWS references]
+    H --> K[Evidence checks and analyst-review gate]
+    I --> K
+    J --> K
+    K --> L[Executive Markdown and HTML report\nobservations, business exposure, action checks]
+    G --> M[Independent scoring AFTER predictions]
+    H --> M
+    I --> M
+    J --> M
 ```
 
-**Architecture note:** The current CloudTrail case builder and Wazuh/RAG prototypes execute separately; the complete **CloudTrail case → LLM → evaluation** workflow is still being integrated. Arrows above describe the target research flow, not proof of end-to-end production readiness.
+The *same verified Wazuh events* are used for each of the three investigators. The AI prompt excludes synthetic ground-truth labels and Wazuh rule severity. The bridge is a **file-polling prototype**, not a dashboard click integration or production streaming service.
 
-![Verified SOC evidence pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
+## 3. Technology and design choices
 
-The [original SOC visual walkthrough](#visual-soc-laboratory-walkthrough) and six authentic lab screenshots are preserved. See [AI architecture and code walkthrough](docs/ai_architecture.md) for module responsibilities, inputs, limitations, and runnable commands.
+| Layer | Technology | What it does |
+|---|---|---|
+| Host / lab | Windows + VMware Workstation + Ubuntu Linux | Isolated local test environment |
+| SIEM | Wazuh 4.14.9 Manager, Indexer, Dashboard | Ingests tagged JSON and issues three alert levels |
+| Investigation | Python 3, JSON/JSONL | Case matching, baseline classification, report generation |
+| Local AI | Ollama + **pretrained** `qwen2.5:1.5b` | LLM-only and RAG-assisted assessments; **not fine-tuned** |
+| Retrieval | Curated local MITRE ATT&CK / NIST / AWS reference notes | Supplies relevant background; not full-source semantic RAG |
+| Evaluation | Private synthetic labels + Python `unittest` | Post-inference comparison; explicit failures and traceability |
+| Documentation | Markdown, HTML, dashboards and charts | Research audit trail and business-focused report |
 
-### Evidence-backed engineering progress
+## 4. Research design and data
 
-| Capability | Latest verified evidence | State |
-| :-- | :-- | :-- |
-| Live Wazuh monitoring | Two `su` alerts (rules `5503`, `5301`) and dashboard screenshots | Verified |
-| Evidence integrity and Wazuh normalization | SHA-256 checked; two normalized Wazuh events | Verified |
-| Local LLM | Qwen2.5 1.5B inference through Ollama | Prototype executed |
-| Retrieval-augmented inference | Keyword retrieval + LLM JSON reports | Prototype executed |
-| Controlled LLM/RAG comparison | Same-prompt single-case exploratory run | Executed, **no accuracy claim** |
-| CloudTrail development preprocessing | **4,216 events → 1,742 heuristic cases**, including 64 attack-associated cases and 4 mixed-label cases | Executed and checked |
-| Held-out CloudTrail test-set audit | **24,087 events**, 2,585 attack-labeled / 21,502 benign, 10 scenario categories | Audited, **not benchmarked** |
-| Python regression suite | **42 tests passing** at last execution | Existing suite passes; new modules need targeted tests |
+The final Wazuh-linked study uses **100 controlled cases** built from **10 scenario templates repeated 10 times**: 40 labeled benign, 30 suspicious and 30 designated critical. These become **400 generated JSON event records**. Labels are *simulation references*, not proof of actual adversarial activity.
 
-**Key research finding so far:** Both controlled LLM-only and RAG variants marked a known authorized authentication preflight as `suspicious`; the controlled RAG report cited zero knowledge references despite retrieving them. Format-valid JSON and matching citation IDs **do not establish factual accuracy**. One `su` attempt produced two alerts; it is not evidence of two distinct attacks.
+![Four hundred simulated Wazuh events filtered by the academic SOC rule group](docs/assets/soc-2026-11-09/wazuh-filtered-400-events.png)
 
-### Source code and demonstrations
+*Actual Wazuh Threat Hunting screenshot, filter `rule.groups: soc_demo`. The 400 hits are simulated events, not 400 real attacks.*
 
-| Component | Source | Current demonstration |
-| :-- | :-- | :-- |
-| Wazuh evidence normalization | [`normalize_wazuh_alerts.py`](src/ingestion/normalize_wazuh_alerts.py) | `python3 -m src.ingestion.normalize_wazuh_alerts` |
-| Local LLM investigation | [`ai_investigator.py`](src/investigation/ai_investigator.py) | `python3 -m src.investigation.ai_investigator` |
-| RAG investigation | [`rag_investigator.py`](src/investigation/rag_investigator.py) | `python3 -m src.investigation.rag_investigator` |
-| Exploratory LLM/RAG comparison | [`compare_rag_conditions.py`](src/evaluation/compare_rag_conditions.py) | Single-case run already performed; private output not published |
-| CloudTrail preprocessing | [`build_cloudtrail_cases.py`](src/ingestion/build_cloudtrail_cases.py) | `python3 -m src.ingestion.build_cloudtrail_cases` |
-| Python regression tests | [`tests/`](tests/) | `python3 -m unittest discover -s tests` |
+Our custom rule matches on JSON action names and tags:
 
-**Execution dependencies:** These are development commands, **not yet a one-click independent demo**. Ollama plus the locally downloaded `qwen2.5:1.5b` model is required for LLM runs. Evidence ZIPs and Wazuh JSONL records stay under the Git-ignored `data/lab_evidence/` directory and are not distributed publicly. A sanitized, self-contained professor demonstration and installation guide remain on the roadmap.
+| Rule ID | Wazuh level | Examples | Unique event count |
+|---|---:|---|---:|
+| `110100` | 3 | Routine API inventory and generic cloud actions | 160 |
+| `110101` | 8 | `GetObject`, `GetBucketAcl`, `ConsoleLogin` | 140 |
+| `110102` | 12 | `DeleteTrail`, `StopLogging`, `CreateAccessKey`, `AttachUserPolicy`, `DeleteObject` | 100 |
 
-**Research navigation:** [Development log](docs/development_log.md) · [Experiment log](docs/experiment_log.md) · [Dataset card](docs/dataset_card.md) · [Research decisions](docs/research_decisions.md) · [Presentation/demo notes](docs/presentation_demo_notes.md) · [November 4 checkpoint](docs/checkpoints/2026-11-04_research_checkpoint.md)
+![Distribution of Wazuh alert rules for 400 verified unique simulated events](docs/assets/final-2026-11-09/02-wazuh-rule-distribution.png)
 
-<!-- MILESTONE-2026-11-04-AI-CLOUD-END -->
+An archival audit read **797 candidate alert records** (including 397 duplicate copies across current and rotated logs), verified **400 distinct event IDs / 400 expected**, found **zero evidence-field mismatches**, and recovered **all 100 complete cases**. The earlier 397/400 result came from reading only the current `alerts.json` file; it was resolved using the archives.
 
-<!-- phase-98-reliability -->
-## CloudTrail Reliability — November 5, 2026
+### Separate real-world-style development dataset
 
-**50/50 tests passing | 4,216 CloudTrail records | 1,742 investigation cases**
+An **earlier, separate** research track used publicly released **Ariel Cyber CloudTrail data** for development and a small six-case paired pilot; raw archives contain approximately 4,216 development and 24,087 external-test records. **Do not combine** its binary attack-associated scores with the final three-class synthetic SOC results or claim the external archive was used for a completed final evaluation. See [dataset card](docs/dataset_card.md), [three-method CloudTrail pilot](docs/three_method_comparison.md), and [research timeline](docs/RESEARCH_JOURNEY_AND_LIMITATIONS.md).
 
-| Research metric | Verified result |
-|---|---:|
-| Attack-associated cases | 64 |
-| Mixed-label cases | 4 |
-| New reliability tests | 8 |
-| Total automated tests | 50 |
+## 5. Final controlled experiment — 100 cases
 
-### Cloud AI pipeline
+![Classification accuracy on 100 identical synthetic incident cases](docs/assets/final-2026-11-09/01-final-accuracy.png)
 
-![SOC Evidence Pipeline](docs/assets/diagrams/soc-evidence-pipeline.png)
+| Method | Correct / 100 | Accuracy | Interpretation |
+|---|---:|---:|---|
+| **Rule-based baseline** | 100 | **100%** | Rules closely match deliberately generated patterns; optimistic and not a production estimate |
+| **Local LLM only** | 53 | **53%** | More misclassifications, including risk underrating |
+| **RAG-assisted LLM** | 30 | **30%** | Mainly predicted `suspicious`; retrieval did not improve classification |
 
-**CloudTrail → Normalization → Case Correlation → AI/RAG Investigation → Evaluation**
+All three methods evaluated the **same complete cases**. The evidence-based review gate is a separate safety mechanism: **do not report its effectiveness as improved AI accuracy**. Output quality flags identify some incorrect interpretations, but passing automated checks does not validate all natural-language claims.
 
-The current correlation algorithm is experimental. Ground-truth labels are kept separate from AI input.
+**Central finding:** Adding a small pretrained LLM, or giving it curated security reference context, did **not** improve classification on this deliberately constructed benchmark. This is a **negative comparative result**, not a deployment-ready measurement. Repeated templates, a matched deterministic baseline, and a limited on-device model constrain generalization.
 
-[AI Architecture](docs/ai_architecture.md) · [Experiment Log](docs/experiment_log.md) · [Development Log](docs/development_log.md)
+See [the fully reported results](docs/wazuh_ai_final_results.md) for the detailed metrics and [experiment log](docs/experiment_log.md) for failures, corrections, and run provenance.
 
-<!-- phase-99-cloud-ai -->
-## Phase 99 — CloudTrail AI Investigation
+## 6. Trace an investigation: `SOCSIM-009`
 
-The first real CloudTrail development case was analyzed using
-local Qwen2.5 1.5B and retrieved AWS security guidance.
+Wazuh recorded three linked simulated IAM actions:
 
-**Pipeline:** CloudTrail case → evidence selection →
-knowledge retrieval → Qwen → structured SOC report.
+| Source evidence ID | API action | Wazuh rule |
+|---|---|---|
+| `SOCSIM-009-EVT-01` | `ListPolicies` | `110100` |
+| `SOCSIM-009-EVT-02` | `CreateAccessKey` | `110102` |
+| `SOCSIM-009-EVT-03` | `AttachUserPolicy` | `110102` |
 
-- 3 CloudTrail events analyzed.
-- 32.03-second CPU inference.
-- Report saved privately.
-- 5 new tests passed.
-- Citation IDs and report format validated.
+The monitoring and investigation are separate processes connected through *verified Wazuh alert records*, case ID and event IDs. In the observed run, conventional rules classified this case **critical** while LLM-only and RAG classified it **suspicious**; a conservative review gate flagged the discrepancy. The report advises a human to verify IAM authorization, access key changes and policy history. **The simulated API names do not prove those operations succeeded.**
 
-**Research finding:** The model classified routine-looking
-SSM activity as suspicious without sufficient supporting context.
-Factual correctness remains unverified.
+### Quick reproduction on an existing prepared VM
 
-[Cloud AI source](src/investigation/cloud_case_investigator.py) |
-[Cloud knowledge](data/knowledge_base/cloudtrail_guidance.json)
+```bash
+cd ~/Projects/ai-cloud-incident-response
+python3 -m unittest discover -s tests -q
+sudo python3 -m src.demo.wazuh_pipeline audit \
+  --alerts /var/ossec/logs/alerts --out /tmp/soc-audit
+sudo python3 -m src.demo.wazuh_pipeline watch \
+  --alerts /var/ossec/logs/alerts --case SOCSIM-009 --once \
+  --out /tmp/soc-new-investigation
+sudo python3 -m src.demo.wazuh_pipeline evaluate \
+  --out /tmp/soc-new-investigation
+```
 
-<!-- phase-100-verification -->
-### Phase 100 — AI Evidence Verification
+Pick a **fresh `--out` path**, or `watch` correctly uses its cached result. The generated `EXECUTIVE_REPORT_REVIEW_REQUIRED.html` must be reviewed by a human before use. **Do not rerun the full experiment or modify the source data during a live demonstration.**
 
-**66/66 tests passing.** An independent verifier now checks
-AI report integrity, evidence citations, retrieved knowledge,
-and selected factual overclaims.
+![Wazuh Threat Hunting overview with rule levels and other genuine Linux security alerts](docs/assets/soc-2026-11-09/wazuh-threat-hunting-overview.png)
 
-First CloudTrail report: three review flags; manual review required.
+*Dashboard context: simulated cloud alerts coexist with routine Linux security activity. These are different evidence sources.*
 
-[Verifier source](src/evaluation/verify_cloud_ai_report.py) |
-[Verification tests](tests/test_cloud_ai_report_verifier.py)
+## 7. Executive output and safety boundaries
 
-This is targeted verification, not complete automated fact-checking.
+The generated HTML/Markdown report provides observed operations, potential business exposure, cited Wazuh-matched event IDs, model decisions, conservative automated claim flags, and recommended human checks. It intentionally does **not** promote raw AI narrative to a verified finding.
 
-<!-- cloud-evaluation-framework -->
-## Cloud Investigation Evaluation
+Important safeguards:
 
-The evaluation framework compares investigation reports against
-separately stored CloudTrail case-level ground truth.
+- Unverified or incomplete event records are **excluded**, not inferred.
+- API actions are **observations**, not confirmed outcomes, breaches or damages.
+- Risk-reducing AI judgments cannot silently override evidence-based priority review.
+- Model failures/abstentions remain recorded; no fallback to benign.
+- Recommendations require **analyst approval**; no autonomous AWS actions.
 
-- Development cases: 1,742
-- Attack-associated cases: 64
-- Mixed-label cases: 4
-- Automated tests: 80 passing
-- First AI report: one false positive against dataset labels
+## 8. Repository map
 
-Only one AI report has been evaluated so far. No overall
-accuracy or multi-method performance claims are established.
+| Path | Role |
+|---|---|
+| `src/demo/soc_demo.py` | Deterministic synthetic generator and earlier six-case demonstration |
+| `src/demo/wazuh_pipeline.py` | Verified Wazuh alert reader, polling bridge, comparative evaluation |
+| `src/demo/grounded_model.py` | Local Qwen prompt, constrained JSON and citation validation |
+| `src/demo/executive_html.py` | Stakeholder-friendly HTML report rendering |
+| `src/ingestion/` | Earlier synthetic, Linux and CloudTrail evidence preparation |
+| `src/investigation/` | Research baseline / LLM / RAG implementations |
+| `src/evaluation/` | Integrity verification, benchmarking and evaluation components |
+| `data/knowledge_base/` | Curated security reference notes (tracked) |
+| `deploy/wazuh/` | Wazuh manager monitoring helper and custom rules |
+| `tests/` | Reproducible regression tests (140 passed in verified 9 Nov run) |
+| `docs/` | Research methodology, reports, visuals, timeline and setup guide |
+| `data/lab_evidence/` | **Private / Git-ignored** generated events, labels, logs and AI outputs |
 
-[Evaluation source](src/evaluation/evaluate_cloud_investigations.py) |
-[Evaluation tests](tests/test_cloud_investigation_evaluation.py)
+### Documentation index
 
-## Wazuh-to-AI: verified end-to-end research milestone
+- **[From scratch: VMware → Ubuntu → Wazuh → Ollama → results](docs/SETUP_FROM_SCRATCH.md)**
+- [Study journey, bugs, experiments and limitations](docs/RESEARCH_JOURNEY_AND_LIMITATIONS.md)
+- [Final 100-case Wazuh research results](docs/wazuh_ai_final_results.md)
+- [Wazuh-to-AI runbook](docs/wazuh_ai_completion_runbook.md)
+- [Dataset descriptions and provenance](docs/dataset_card.md)
+- [Development log](docs/development_log.md) · [Experiment log](docs/experiment_log.md)
+- [Design decisions](docs/research_decisions.md) · [Architecture notes](docs/ai_architecture.md)
+- [Prior CloudTrail three-method pilot](docs/three_method_comparison.md)
+- [Repository inventory and cleanup audit](docs/REPOSITORY_AUDIT.md)
 
-The tested Wazuh alert ingestion → baseline / local LLM / RAG → evidence-based human-review gate → stakeholder report workflow is documented in [the runbook](docs/wazuh_ai_completion_runbook.md). For actual sample sizes, error rates, model scores and limitations, see [the observed results](docs/wazuh_ai_final_results.md). The cloud events were **synthetically generated**; model assessments are not independently verified compromises.
+## 9. Reproducibility, ethics and privacy
+
+All experiment outputs under `data/lab_evidence/` are intentionally untracked: another researcher **must regenerate and score their own runs**. Runtime and LLM decisions can differ by model, operating environment, seed and software versions. Do not commit Wazuh alert exports, credentials, passwords, private labels or unreviewed executive reports.
+
+This project is a classroom **research prototype**, not an operational managed detection and response service. It does not claim successful attacks, verified compromise, real analyst time savings, statistically independent 100 scenarios, comprehensive MITRE/NIST coverage, fine-tuned models or autonomous remediation.
+
+## 10. Conclusion
+
+We successfully integrated a real Wazuh SIEM with a local, evidence-verified three-method AI investigation pipeline and stakeholder reporting. **400/400 simulated events and 100/100 cases were source verified**, and the research produced a clear negative result: under these test conditions, **rule-based triage beat both LLM-only and RAG-assisted classification**. The practical contribution is a transparent, traceable **human-supervised** workflow and a documented methodology for evaluating AI failure modes, not a claim that generative AI is better than deterministic security detection.
+
+*Academic study: Lakehead University, COMP 5112 · November 2026.*

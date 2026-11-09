@@ -315,3 +315,21 @@ Verified result: 50 tests passed. The portable standalone AI demo remains pendin
 **If asked about deployment errors:** Show experiment log: first custom rule `<field name="action">` failed with Wazuh static-field error, roll-back restored service, two conditions were changed to `<action type="pcre2">`, all three rules were then verified. **Do not erase the debugging history.**
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Final verified 6–7-minute demonstration flow — 9 Nov 2026
+
+1. **Intro (45 s):** show README problem, method and architecture; no real attacks or fine-tuning.
+2. **Wazuh (75 s):** Threat Hunting → Events → `rule.groups: soc_demo`; use historical Nov 8–9 date window. Show alert rules 110100/110101/110102 and 400 events. Filter `data.sim_case_id: SOCSIM-009` for three IAM-action records.
+3. **Investigation (80 s):** in Ubuntu use a **fresh** `--out` path:
+
+   ```bash
+   sudo python3 -m src.demo.wazuh_pipeline watch --alerts /var/ossec/logs/alerts --case SOCSIM-009 --once --out /tmp/soc-recording-fresh
+   sudo python3 -m src.demo.wazuh_pipeline evaluate --out /tmp/soc-recording-fresh
+   ```
+
+4. **Report (90 s):** open `EXECUTIVE_REPORT_REVIEW_REQUIRED.html`; explain verified actions, `SOCSIM-009-EVT-01`–`EVT-03`, IAM business concern, QA flags and manual checks.
+5. **Results (80 s):** show 100-case final chart: baseline 100%, LLM-only 53%, RAG 30%; explain baseline-template alignment and negative AI reliability result.
+
+**Rehearse without recording** and warm `sudo -v` first. The last published 100-case outputs remain untouched; this is one *new* case replay. Model predictions may vary. No action in the demo makes AWS API calls or remediates an account.

@@ -211,3 +211,14 @@ reason for change, and any effect on completed experiments or conclusions.
 Full justification and evidence: [SOC results](soc_results_2026-11-09.md).
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+<!-- FINAL-RESEARCH-2026-11-09-APPEND -->
+
+## Final interpretation decisions — 9 Nov 2026
+
+1. **Source of truth:** Do not equate SIEM rule matches with proven attacks. Trust only Wazuh event records whose source fields and `sim_event_id` agree with the independent generated source manifest; keep simulation labels out of model inputs.
+2. **Fair comparison:** Baseline, local LLM and RAG consume identical complete case evidence; errors and abstentions remain in all-case accuracy. Do not present the rule-enforced review gate as AI accuracy.
+3. **Method boundaries:** This is **polling-based Wazuh-file integration**, not a Wazuh click-through UI or autonomous response. RAG uses local curated security notes, not a comprehensive or up-to-date knowledge service.
+4. **Negative findings are valid:** 100% baseline, 53% LLM, 30% RAG on in-distribution synthetic cases. Preserve unfavorable AI results without relabeling outcomes.
+5. **Claim safety:** Executive summaries are anchored in actual event names and verified IDs; unsupported model text is flagged, not silently trusted. Review is mandatory before release.
+6. **Privacy and cleanup:** Keep raw model output, labels and Wazuh alert exports Git-ignored. Remove only demonstrably empty, nonstructural artifacts; retain empty Python package markers and historical negative experiments.
