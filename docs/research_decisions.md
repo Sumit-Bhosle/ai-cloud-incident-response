@@ -193,3 +193,21 @@ reason for change, and any effect on completed experiments or conclusions.
 **Trust boundary:** Model responses are recommendations requiring review; no automated destructive remediation. A valid schema, matching event IDs, or retrieved MITRE ID is not sufficient proof of a supported conclusion. Add claim-level validation and abstention assessment.
 
 **Professor reproducibility:** Build a sanitized portable dataset, documented installation requirements, one-command demo, source-code walkthrough, and video/PPT showing exactly which functions cause each stage. Existing dev scripts still depend on private evidence and Ollama; this deliverable is pending.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Design decision — 2026-11-09 | Treat the SOC simulation as a functional demonstration
+
+**Decision:** Publish reviewed methodology, selected aggregate metrics, and authentic Wazuh screenshots, but keep labeled cases and generated AI reports private. Preserve the chronological record and avoid merging experiments.
+
+- **Synthetic Wazuh demonstration:** 100 engineered scenarios/400 events; six three-class cases for LLM comparison. These are not real incident-response accuracy estimates.
+- **Public CloudTrail development comparison:** different evidence population and a **binary** attack-associated classification metric. Its precision/recall/F1 cannot be compared numerically against the synthetic three-class outcomes.
+- **Grounding boundary:** Known citation IDs, retrieved reference documents and valid JSON alone don't establish correctness of claims. The audited executive brief is written independently from visible event actions and explicitly states uncertainties.
+- **Operational safety:** Wazuh rule severity must not be equated with verified compromise; analyst approval stays mandatory. No automated remediation in this demo.
+- **Unresolved:** 400 UI hits vs 397 matches in the inspected local file, and misleading model explanations. These are tracked rather than quietly normalized or discarded.
+
+Full justification and evidence: [SOC results](soc_results_2026-11-09.md).
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

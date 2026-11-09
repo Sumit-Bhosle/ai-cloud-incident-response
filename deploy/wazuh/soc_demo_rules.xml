@@ -1,0 +1,20 @@
+<group name="soc_demo,academic_simulation,">
+  <rule id="110100" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="soc_demo" type="pcre2">^research_simulation$</field>
+    <description>Academic SOC demo: synthetic cloud API event (not a real incident)</description>
+    <group>soc_demo,simulation,</group>
+  </rule>
+  <rule id="110101" level="8">
+    <if_sid>110100</if_sid>
+    <action type="pcre2">^(ConsoleLogin|GetBucketPolicy|GetBucketAcl|GetObject)$</action>
+    <description>Academic SOC demo: security-relevant API activity (simulated)</description>
+    <group>soc_demo,simulation,</group>
+  </rule>
+  <rule id="110102" level="12">
+    <if_sid>110100</if_sid>
+    <action type="pcre2">^(DeleteTrail|StopLogging|AttachUserPolicy|CreateAccessKey|DeleteObject)$</action>
+    <description>Academic SOC demo: high-impact cloud API operation (simulated)</description>
+    <group>soc_demo,simulation,</group>
+  </rule>
+</group>

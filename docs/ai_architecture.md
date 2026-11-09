@@ -107,3 +107,15 @@ selective classification metrics, citation membership,
 verification flags and inference time.
 
 Cross-method comparison requires reports for common case IDs.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Implemented simulated SOC integration — verified 2026-11-09
+
+The [actual execution diagram, Wazuh screenshots, and evaluation results](soc_results_2026-11-09.md) supersede any impression that the SOC-to-LLM step is automatically triggered. The simulator emits two views of **the same synthetic events**: a monitored JSON log for Wazuh and grouped case JSONL for the Python investigators. Wazuh rules 110100–110102 produce detection alerts; Python independently runs baseline, Qwen2.5 LLM-only, and keyword-retrieval RAG. A separate ID-matching routine compares Wazuh alert IDs against source event IDs; the AI does **not** presently ingest the Wazuh dashboard or its indexed alerts directly.
+
+The pilot showed 400 dashboard hits, 397 local alert-ID matches and a six-case comparison. **Retrieval is not source-grounded fact verification** and the generated report contains identified hallucinations. No fine-tuning, autonomous incident response, or analyst-efficiency improvement is established.
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

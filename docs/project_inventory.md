@@ -126,3 +126,13 @@ The initial baseline investigators were designed for earlier research scenario f
 - **Run project regression tests:** `python3 -m unittest discover -s tests -q`
 - **Run development-only report evaluator:** `python3 -m src.evaluation.evaluate_cloud_investigations`
 - **Next milestone:** Paired rule-based / LLM-only / RAG-assisted evaluation on identical selected development cases.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Inventory update — 2026-11-09 | Executed simulated SOC workflow
+
+The opening inventory snapshot above remains a historical checkpoint. The newer implemented files are `src/demo/soc_demo.py`, `deploy/wazuh/soc_demo_rules.xml`, `deploy/wazuh/enable_demo.py`, `tests/test_soc_demo.py` and `docs/soc_demo.md`. Research-simulation evidence and model reports live privately under `data/lab_evidence/soc_demo/` and are excluded from Git. Wazuh confirmed **400 filtered demo event hits**, with **397 matching generated IDs** in the inspected local `alerts.json`. The six-case synthetic classification resulted in **6/6 correct for the baseline, 2/6 for LLM-only, 2/6 for RAG**; the existing separate public CloudTrail six-case pilot is a different measurement. Charts, screenshots, corrected executive case study, known model errors, and next work are documented in [soc_results_2026-11-09.md](soc_results_2026-11-09.md).
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

@@ -162,3 +162,13 @@ creating or configuring additional virtual machines.
 **Target next integration:** Case evidence → improved correlation and retrieval → local LLM analysis → fact/citation-support checks → analyst-reviewable SOC report → fair event/case-level evaluation. CloudTrail and live Wazuh are different data sources; do not imply our local Wazuh experiment is itself a cloud attack.
 
 See [AI architecture and source-code walkthrough](ai_architecture.md).
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Architecture update — 2026-11-09 | Executed synthetic SOC pipeline
+
+The controlled 100-case simulator now emits **400 synthetic cloud-like event records** to a JSON file monitored by a real Wazuh 4.14.9 Manager. Rules `110100`/level 3, `110101`/level 8 and `110102`/level 12 were validated and observed; Threat Hunting displayed 400 hits under `rule.groups = soc_demo`. A local `alerts.json` cross-check matched **397/400** generated event IDs, leaving three not yet reconciled. Independently, `src/demo/soc_demo.py` investigates cases built from the **same generated evidence IDs** using deterministic baseline, Qwen2.5 LLM-only, and RAG. **No automatic Wazuh-to-LLM ingestion exists in this milestone.** See the [executed pipeline diagram, visual proof and failure analysis](soc_results_2026-11-09.md). Synthetic scenario labels are stored separately from prompt inputs and are not independent field truth.
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

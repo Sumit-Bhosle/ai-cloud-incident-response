@@ -469,3 +469,28 @@ all free-text claims. Results do not establish RAG superiority.
 
 Ground-truth labels were used for scoring, not investigator input.
 All three experiment directories remain preserved privately.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Experiment milestone — 2026-11-09 | Wazuh synthetic SOC and six-case AI evaluation
+
+**Evidence:** [Run notes, charts, dashboard screenshots and model-output audit](soc_results_2026-11-09.md). The 100 cases were deliberately simulated; the separate public CloudTrail development comparison is **not** pooled with these figures.
+
+| Check / trial | Actual observation | Limitation / follow-up |
+|---|---|---|
+| Input generation | 100 cases; **40 benign / 30 suspicious / 30 designated critical**; 400 synthetic event IDs | Labels are engineered and not field-verified attack ground truth |
+| Wazuh rule unit testing | General `110100`/3; `GetObject` → `110101`/8; `StopLogging` → `110102`/12 | Rule validation confirms detection patterns, not malicious intent |
+| SOC visual ingestion | Threat Hunting filtered `rule.groups: soc_demo` → **400 indexed hits** | Wazuh contains other live Linux alerts; filtered screenshot isolates simulated test subset |
+| Local alert cross-check | `397 / 400` matched (`0.9925`) | **Open issue**: three event IDs missing from inspected local-file results; reason unknown |
+| Deterministic baseline | **6 answered; 6 correct; 0 failures** | Six scenarios are small and engineered; not representative |
+| Local Qwen2.5 1.5B (LLM-only) | **4 answered; 2 correct; 2 errors**; mean **20.01 s/case** including failures | Wrongly labeled suspicious login and a critical case benign |
+| Qwen + retrieved reference notes (RAG) | **5 answered; 2 correct; 1 error**; mean **22.65 s/case** including failures | Designated-critical cases downgraded to suspicious |
+| Generated executive report | Saved to private `data/lab_evidence/soc_demo/executive_report.md` | **Unsafe to quote verbatim as facts**: wrong descriptions of CloudTrail/S3 and IAM/brute-force evidence |
+
+**Debugging history:** (1) Unprivileged install preview couldn't read `/var/ossec/etc/ossec.conf`; `sudo` resolved access. (2) First Wazuh restart failed despite preliminary analysisd validation; manager recovered on configuration rollback. Log showed `Field 'action' is static` for custom rule `110101`. (3) Corrected **two** XML action conditions to `<action type="pcre2">`; `wazuh-analysisd -t` and `wazuh-logcollector -t` passed and Wazuh Manager ran again. (4) Verified detections using `wazuh-logtest`, dashboard and a per-event-ID cross-check. Both the fault and correction are preserved as an engineering record.
+
+**Research finding (scoped):** LLM/RAG did not outperform the simple baseline on this one six-case three-class simulation. Generated prose frequently exceeded its evidence. No independent analyst-time efficiency, generalization, production safety or automatic Wazuh-to-LLM trigger was demonstrated.
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

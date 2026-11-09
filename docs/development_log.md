@@ -556,3 +556,15 @@ confusion matrices, citation metrics, review status,
 and inference-time tracking.
 
 Fixed mixed-case counting and unavailable paired comparisons.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Development checkpoint — 2026-11-09 | Completed SOC demo ingestion + first executive report
+
+Added/ran `src/demo/soc_demo.py` and optional `deploy/wazuh` integration. Confirmed Wazuh Manager stable following a reversible custom-rule startup error; the repair changed two `action` conditions to valid Wazuh action tags. Prepared 100 simulated cases/400 log events; mapped the **same `sim_event_id`** into case evidence and Wazuh alert records; observed 400 filtered indexed hits and 397 matching IDs in one local alert file. Compared rule baseline / Ollama Qwen LLM-only / RAG on six deliberately selected three-class cases and produced a private executive report. Found several nontrivial unsupported claims in that report. Full [results and screenshots](soc_results_2026-11-09.md).
+
+**Architecture status:** Real Wazuh receives the test logs. The investigator reads its own generated case JSONL rather than fetching Wazuh alerts. Human review and claim-level grounding are still needed. The older public CloudTrail development study remains separate.
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

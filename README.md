@@ -1,5 +1,35 @@
 # Evaluating AI-Assisted Cloud Security Incident Response
 
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Latest verified milestone · SOC simulation and AI investigation (9 Nov 2026)
+
+> **Research prototype / academic simulation:** 100 generated test cases and 400 simulated cloud API records were ingested by a real Wazuh deployment. **No real cloud attacks were executed.** The LLM is pretrained Qwen2.5 1.5B via Ollama, not project-fine-tuned.
+
+![Wazuh Threat Hunting screenshot: 400 filtered synthetic alert hits](docs/assets/soc-2026-11-09/wazuh-filtered-400-events.png)
+
+*Observed visual evidence: Wazuh Threat Hunting → Events, `rule.groups: soc_demo`, **400 hits** with detection levels **3, 8 and 12** (rule IDs `110100`–`110102`). These are generated log entries, **not 400 actual security incidents**.*
+
+| Controlled research measurement | Verified observation |
+|---|---:|
+| Prepared simulated cases | **100**: 40 benign, 30 suspicious, 30 designated critical |
+| Simulated log entries / Wazuh filtered UI hits | **400 / 400** |
+| Local `alerts.json` event-ID cross-check | **397 / 400 (99.25%)** — 3-record discrepancy unresolved |
+| Evaluated cases (identical evidence in all methods) | **6** |
+| Correct predictions out of 6 attempts | **Rule baseline 6** · **LLM-only 2** · **RAG 2** |
+| Unsuccessful/invalid model answers | **LLM-only 2 / 6** · **RAG 1 / 6** |
+
+![Six-case outcome comparison: correct, incorrect and failed outputs](docs/assets/soc-2026-11-09/02-six-case-outcomes.png)
+
+**Important research finding:** On this deliberately engineered six-case **synthetic** sample, adding a small local LLM or retrieval did **not** improve classification. Several AI explanations contain unsupported claims, including confusing AWS CloudTrail trail deletion with S3 bucket deletion. The generated executive narrative is **not client-approved**. The software runs a human-supervised research workflow, **not autonomous incident remediation**.
+
+**Explore the evidence:** [Full SOC results, charts, case matrix, corrected executive brief and deployment log](docs/soc_results_2026-11-09.md) · [SOC demo instructions](docs/soc_demo.md) · [Experiment log](docs/experiment_log.md) · [Separate CloudTrail development comparison](docs/three_method_comparison.md)
+
+> **Boundary:** The demo Python investigator and Wazuh monitor the **same generated evidence with matching IDs**. Python does not yet automatically consume Wazuh alerts. Public CloudTrail pilot findings and three-class synthetic SOC metrics are separate experiments; do not mix their scores.
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
+
+
 **[Project Inventory — Tech Stack, Datasets, Knowledge Base & Source Files](docs/project_inventory.md)**
 
 **Subtitle:** Accuracy, Reliability, Explainability, and Analyst Efficiency

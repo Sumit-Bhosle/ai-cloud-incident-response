@@ -148,3 +148,13 @@ The corrected experiment in `comparison_03/` does **not** change case selection,
 - **Ollama HTTP 500/502/503/504:** allow one bounded repeat of the generation request; HTTP 400 and other nontransient errors still fail immediately. A repeated service error is recorded, not hidden.
 
 Five further regression tests check these conditions. A real Qwen smoke test and complete comparison are required to establish whether this change works on the Ubuntu VM; mock tests alone cannot prove it.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Separate Nov 9 synthetic SOC experiment — do not merge with CloudTrail pilot
+
+A later **100-case synthetic Wazuh simulation** ran a distinct **six-case three-class** comparison. On the same selected cases, the rule baseline was **6/6 correct**, Qwen LLM-only **2/6 correct with 2 output errors**, and Qwen RAG **2/6 correct with 1 error**. Class labels were deliberately generated; this is a demonstration, not external attack-detection accuracy. The prior CloudTrail development benchmark in this document measures a **different binary attack-associated target**, so its F1 scores cannot be combined with these synthetic three-class results. See the [synthetic SOC evaluation with screenshots, outcome charts and factual-error audit](soc_results_2026-11-09.md).
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

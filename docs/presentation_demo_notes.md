@@ -296,3 +296,22 @@ Show `src/ingestion/build_cloudtrail_cases.py` and explain:
 Run: `python3 -m unittest discover -s tests`
 
 Verified result: 50 tests passed. The portable standalone AI demo remains pending.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Professor demonstration — verified SOC pilot (9 November 2026)
+
+**Show in this order (approximately 3–4 minutes, using existing saved outputs):**
+
+1. **Set scope:** "These are 100 simulated cloud-security cases, generating 400 synthetic log events. We performed no real attacks." Show [dataset distribution](assets/soc-2026-11-09/01-simulation-distribution.png).
+2. **Real SIEM / simulated input:** Open Wazuh **Threat Hunting → Events**, filter `rule.groups = soc_demo`, and show **400 hits** across severity rules 110100/3, 110101/8, 110102/12; [verified screenshot](assets/soc-2026-11-09/wazuh-filtered-400-events.png). Do **not** call 100 high alerts 100 real critical incidents.
+3. **Same source IDs, separate execution paths:** Point out `sim_event_id` appears in generated case and Wazuh fields. Local file cross-check: **397/400**; acknowledge three-record unresolved difference.
+4. **Three-method comparison:** Show [six-case stacked outcome chart](assets/soc-2026-11-09/02-six-case-outcomes.png) and [case-level matrix](assets/soc-2026-11-09/03-same-case-decisions.png): baseline 6/6 correct, LLM-only 2/6 correct with 2 errors, RAG 2/6 correct with 1 error. This **small engineered sample does not prove general superiority**.
+5. **Critical analysis:** Open the [reviewed SOCSIM-008 executive brief](soc_results_2026-11-09.md#reviewed-sample-executive-brief--socsim-008-simulation-only). Explain that `StopLogging`/`DeleteTrail` would justify investigation in a live AWS account, but the model mistakenly called it S3-bucket deletion. An evidence-grounded report needs review.
+6. **Close:** "A working research demonstration now joins SOC visibility to AI comparison on shared simulated evidence; future steps are automated alert-to-AI intake, external ground-truth evaluation, claim-level checking and analyst efficiency measurement." No live AI runs or log reinjection required to demonstrate the recorded results.
+
+**If asked about deployment errors:** Show experiment log: first custom rule `<field name="action">` failed with Wazuh static-field error, roll-back restored service, two conditions were changed to `<action type="pcre2">`, all three rules were then verified. **Do not erase the debugging history.**
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->

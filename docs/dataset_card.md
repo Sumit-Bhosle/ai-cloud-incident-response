@@ -70,3 +70,20 @@ Test ZIP SHA-256: `d5dce3dbdb61ffb935e16cb4728aaca933daa42201a672dfad7387fd168f6
 **Development output:** `4,216` source records → `1,742` actor/IP/time-bin cases; `64` cases contain ≥1 attack-labeled record; `4` cases combine benign and attack-labeled events. `cases.jsonl` has no explicit `should_sample`/`attack_name` labels. Separate `case_ground_truth.jsonl` and `event_ground_truth.jsonl` remain private.
 
 **Limitations:** Attack *records* are not independent attacks; development correlation may merge or split actual sequences. Future evaluation must audit unintended label leakage, identity stability, timestamp leakage, case contamination and the impact of class imbalance. Do not claim cloud-incident accuracy without held-out, case-level scoring.
+
+---
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
+
+## Distinct dataset — 100-case academic SOC simulation (2026-11-09)
+
+This is **not** a new split of the Ariel Cyber CloudTrail dataset. `python3 -m src.demo.soc_demo prepare` generates 100 controlled cloud-like cases (40 benign, 30 suspicious, 30 *designated critical*) with **400** events and synthetic identifiers (`SOCSIM-...`). Several scenario templates repeat with different test details. Evidence uses reserved documentation IP ranges; **no real AWS API call or attack was performed**.
+
+- Generated model-visible cases: `data/lab_evidence/soc_demo/cases.jsonl`; simulated Wazuh log entries: `wazuh_events.jsonl`; separate labels: `ground_truth_PRIVATE.jsonl`; SHA-256 manifest: `manifest.json`.
+- 400 generated log entries appeared as 400 hits under the Wazuh demo rule-group filter, while the local `alerts.json` cross-check found **397/400** matching event IDs. Full reconciliation remains open.
+- Six **stratified functional demonstration cases** (2 per designed class) were compared across baseline, Qwen LLM-only and Qwen + retrieval. Not representative or independent ground truth for actual incidents.
+- **Do not combine** the synthetic demo accuracy with the separate controlled-public-CloudTrail binary benchmark's F1 scores.
+
+See [complete SOC demo methodology and charts](soc_results_2026-11-09.md).
+
+<!-- SOC-MILESTONE-2026-11-09-VERIFIED:END -->
