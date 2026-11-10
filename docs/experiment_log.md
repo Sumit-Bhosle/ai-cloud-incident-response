@@ -1,6 +1,6 @@
 # Experiment Log
 
-## Project
+## Research Topic
 
 Evaluating AI-Assisted Cloud Security Incident Response
 
