@@ -1,6 +1,6 @@
 # Research and Technical Decision Log
 
-## Project
+## Research Topic
 
 Evaluating AI-Assisted Cloud Security Incident Response
 
@@ -91,7 +91,7 @@ evaluation results.
 **Decision:** Prioritize free local tools and avoid requiring paid cloud
 subscriptions for the initial experiments.
 
-**Rationale:** The project should remain accessible and reproducible within
+**Rationale:** The Research Topic should remain accessible and reproducible within
 the available computing environment.
 
 **Constraints:** The current Ubuntu VM has approximately 7.2 GiB of reported
@@ -129,7 +129,7 @@ development history, experiment records, and research decisions.
 experimental results to the code and data used.
 
 **Current evidence:**
-- Initial project commit: 62cdf54
+- Initial Research Topic commit: 62cdf54
 - Development log commit: 50795dd
 
 **Follow-up:** Record relevant commit IDs and configurations for each
@@ -144,7 +144,7 @@ meaningful experiment.
 **Decision:** Do not assume Wazuh or a local language model is installed or
 working until installation and functional tests confirm it.
 
-**Rationale:** The project should prioritize a working, testable research
+**Rationale:** The Research Topic should prioritize a working, testable research
 pipeline and avoid unsupported compatibility assumptions.
 
 **Next action:** Build and validate the Python baseline first, then reassess
@@ -182,7 +182,7 @@ reason for change, and any effect on completed experiments or conclusions.
 
 ## Research design decision — 2026-11-04 | AI-first incident investigation, not SIEM-only
 
-**Decision:** Wazuh remains a verified monitoring/detection input; the project's evaluated research contribution is the **evidence-grounded AI investigation** workflow, not a new SIEM implementation.
+**Decision:** Wazuh remains a verified monitoring/detection input; the Research Topic's evaluated research contribution is the **evidence-grounded AI investigation** workflow, not a new SIEM implementation.
 
 **Dataset design:** Use controlled Linux/Wazuh evidence to demonstrate live ingestion and use labeled AWS CloudTrail records for cloud-security evaluation. Use the provided development split for architecture iteration and hold the designated test split for final evaluation. Disclose that test-set summary statistics were inspected during development.
 
