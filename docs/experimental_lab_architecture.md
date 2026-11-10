@@ -1,10 +1,9 @@
 # Experimental Laboratory Architecture
 
-## Project
+## Research Topic
 Evaluating AI-Assisted Cloud Security Incident Response
 
 COMP 5112 — Research Methodology
-Group 13
 
 ## 1. Research Objective
 
