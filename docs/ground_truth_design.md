@@ -12,8 +12,6 @@ Define how controlled laboratory incidents, observed
 security telemetry, verified evidence, and expected
 investigation outcomes will be recorded.
 
-Reference: Group 13 Presentation 2, Slides 18-21.
-
 This design is prospective. No genuine laboratory
 incident dataset has yet been collected.
 
