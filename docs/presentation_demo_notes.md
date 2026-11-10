@@ -61,7 +61,7 @@ inputs and support reproducible evaluation.
 They do not directly demonstrate AI superiority or
 measure incident-detection accuracy.
 
-## Professor Demonstration Plan
+##  Demonstration Plan
 
 1. Show an example laboratory record.
 2. Run schema validation.
@@ -258,7 +258,7 @@ Use sanitized records for external sharing.
 
 **Opening explanation:** "Wazuh detects observed security activity. Python structures and verifies the event data. A local Ollama language model generates a draft investigation. Our retrieval module supplies curated security guidance, while validation checks the JSON structure and whether cited IDs exist. The research then evaluates when these drafts are correct, unsupported or misleading."
 
-| Stage | Show this code | Demonstration / professor's likely question |
+| Stage | Show this code | Demonstration / 's likely question |
 | :-- | :-- | :-- |
 | Wazuh loader and normalizer | `src/ingestion/normalize_wazuh_alerts.py` | How are alerts loaded and mapped to a common schema? |
 | Local AI investigator | `src/investigation/ai_investigator.py` | Which model, prompt, fields, parameters and local API are used? |
@@ -281,9 +281,9 @@ python3 -m unittest discover -s tests
 
 **Evidence clips/screenshots:** Reuse the six genuine images in `docs/assets/screenshots/` and the original PNG/SVG in `docs/assets/diagrams/`. Show actual on-screen source and output; never imply the currently planned cloud-case-to-LLM connection or claim-level verifier is already implemented.
 
-**Professor-run deliverable remaining:** Sanitized portable input, supported Python version/dependencies, Ollama model availability/fallback clarity, concise start script, executable test suite, user guide, video, PPT and final report.
+**-run deliverable remaining:** Sanitized portable input, supported Python version/dependencies, Ollama model availability/fallback clarity, concise start script, executable test suite, user guide, video, PPT and final report.
 
-## November 5, 2026 — Professor Code Demonstration
+## November 5, 2026 —  Code Demonstration
 
 Show `src/ingestion/build_cloudtrail_cases.py` and explain:
 
@@ -301,7 +301,7 @@ Verified result: 50 tests passed. The portable standalone AI demo remains pendin
 
 <!-- SOC-MILESTONE-2026-11-09-VERIFIED:START -->
 
-## Professor demonstration — verified SOC pilot (9 November 2026)
+##  demonstration — verified SOC pilot (9 November 2026)
 
 **Show in this order (approximately 3–4 minutes, using existing saved outputs):**
 
