@@ -168,7 +168,7 @@ Important safeguards:
 - [Design decisions](docs/research_decisions.md) · [Architecture notes](docs/ai_architecture.md)
 - [Prior CloudTrail three-method pilot](docs/three_method_comparison.md)
 - [Repository inventory and cleanup audit](docs/REPOSITORY_AUDIT.md)
-
+- [Quick Start — How to Run the Project](HOW_TO_RUN_PROJECT.md)
 ## 9. Reproducibility, ethics and privacy
 
 All experiment outputs under `data/lab_evidence/` are intentionally untracked: another researcher **must regenerate and score their own runs**. Runtime and LLM decisions can differ by model, operating environment, seed and software versions. Do not commit Wazuh alert exports, credentials, passwords, private labels or unreviewed executive reports.
