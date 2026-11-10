@@ -36,7 +36,7 @@ flowchart LR
 | `src/evaluation/compare_rag_conditions.py` | Compare same-prompt runs with/without retrieved docs | One Wazuh case → private comparison | Executed once; non-blind |
 | `src/ingestion/build_cloudtrail_cases.py` | Normalize event fields and group actor/IP/time bins, separate labels | Training ZIP → private case and truth JSONL | Executed on 4,216 records |
 
-## Explain it to the professor
+## Explaination
 
 **`normalize(record, index)` (CloudTrail):** Extracts timestamps, actor identifiers, source IP, AWS service/action and limited context, then returns an event and a grouping key. It intentionally does not copy source `should_sample`/`attack_name` labels into AI evidence.
 
