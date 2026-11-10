@@ -1,6 +1,6 @@
 # Evaluating AI-Assisted Cloud Security Incident Response
 
-**Lakehead University · COMP 5112 Research Methodology · Academic research prototype (November 2026)**
+**Lakehead University · COMP 5112 Research Methodology · Academic research paper (November 2026)**
 
 [![Python](https://img.shields.io/badge/Python-3-blue)](https://www.python.org/) [![Wazuh](https://img.shields.io/badge/SIEM-Wazuh%204.14.9-1176b6)](https://wazuh.com/) [![Ollama](https://img.shields.io/badge/Local%20LLM-Qwen2.5%201.5B-555)](https://ollama.com/) [![Study](https://img.shields.io/badge/Study-controlled%20simulation-555)](#research-design-and-data)
 
