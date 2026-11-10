@@ -515,7 +515,7 @@ ground-truth annotation.
 
 **Next:** Dedicated tests and schema contracts; case-level CloudTrail AI triage; evidence-backed report verification; development/held-out evaluation discipline; professor-runnable demo and source-code walkthrough.
 
-## November 5, 2026 — Phase 98
+## November 5, 2026 - CloudTrail case-building reliability.
 
 Implemented eight automated tests for CloudTrail case-building reliability.
 
@@ -525,7 +525,7 @@ Verified UTC conversion, required-field validation, duplicate source ID preserva
 
 Next: stronger AI investigation, factual verification, and independent evaluation.
 
-## November 6, 2026 — Phase 99
+## November 6, 2026 - CloudTrail case-level AI investigation
 
 Implemented CloudTrail case-level AI investigation using
 local Ollama/Qwen and AWS security knowledge retrieval.
@@ -537,7 +537,7 @@ First real development case: 3 events, 32.03 seconds.
 Structured report saved privately. Evidence and reference
 IDs validated; factual verification remains future work.
 
-## November 6, 2026 — Phase 100
+## November 6, 2026 - independent CloudTrail AI report verifier
 
 Implemented an independent CloudTrail AI report verifier.
 Added 11 tests; full project suite passed 66/66.
