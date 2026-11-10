@@ -52,7 +52,7 @@ python3 -m src.demo.soc_demo compare
 
 Wazuh **rules can detect/highlight simulated API events**; alert presence proves log ingestion and rule match, **not a real compromise or the correctness of AI**. The independent designed labels are in the private truth file. Comparison is against truth after investigation.
 
-## Explain it to the professor
+## Explaination
 
 1. Open Wazuh and show `soc_demo` tagged alerts; optionally show real November Linux PAM alerts separately as a genuine event source.
 2. Show one matched `sim_event_id` from Wazuh and in `cases.jsonl`.
